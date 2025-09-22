@@ -1,0 +1,2002 @@
+[
+  {
+    "id": "BDU10525.1",
+    "url": "models/BDU10525.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ71425.1",
+    "url": "models/PSQ71425.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KGA09086.1",
+    "url": "models/KGA09086.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RZP28624.1",
+    "url": "models/RZP28624.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PQM62056.1",
+    "url": "models/PQM62056.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TEX51253.1",
+    "url": "models/TEX51253.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BDS50908.1",
+    "url": "models/BDS50908.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BDS48601.1",
+    "url": "models/BDS48601.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ75764.1",
+    "url": "models/PSQ75764.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KRO48502.1",
+    "url": "models/KRO48502.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX15377.1",
+    "url": "models/GDX15377.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ244400.1",
+    "url": "models/OZ244400.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP175953.1",
+    "url": "models/CP175953.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GIK75739.1",
+    "url": "models/GIK75739.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GIJ78539.1",
+    "url": "models/GIJ78539.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGL78780.1",
+    "url": "models/GGL78780.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGD58117.1",
+    "url": "models/GGD58117.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BDP99755.1",
+    "url": "models/BDP99755.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ243888.1",
+    "url": "models/OZ243888.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "VIP02740.1",
+    "url": "models/VIP02740.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OY829846.1",
+    "url": "models/OY829846.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PTM12582.1",
+    "url": "models/PTM12582.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PDH56100.1",
+    "url": "models/PDH56100.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RPF79760.1",
+    "url": "models/RPF79760.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RCL66720.1",
+    "url": "models/RCL66720.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TVR90991.1",
+    "url": "models/TVR90991.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX68660.1",
+    "url": "models/GDX68660.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RLT23870.1",
+    "url": "models/RLT23870.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP030884.1",
+    "url": "models/CP030884.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RMF54189.1",
+    "url": "models/RMF54189.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ252252.1",
+    "url": "models/OZ252252.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSN19400.1",
+    "url": "models/PSN19400.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TVR25957.1",
+    "url": "models/TVR25957.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RDI95066.1",
+    "url": "models/RDI95066.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GLV48970.1",
+    "url": "models/GLV48970.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RLT17137.1",
+    "url": "models/RLT17137.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RLS66247.1",
+    "url": "models/RLS66247.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PNY79880.1",
+    "url": "models/PNY79880.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BDP42045.1",
+    "url": "models/BDP42045.1.pdb",
+    "clusters": [
+      "Cluster -1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GIR74196.1",
+    "url": "models/GIR74196.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP121331.1",
+    "url": "models/CP121331.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ244580.1",
+    "url": "models/OZ244580.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GIR98463.1",
+    "url": "models/GIR98463.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX66558.1",
+    "url": "models/GDX66558.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX64887.1",
+    "url": "models/GDX64887.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX48447.1",
+    "url": "models/GDX48447.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245751.1",
+    "url": "models/OZ245751.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX44761.1",
+    "url": "models/GDX44761.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OX044355.1",
+    "url": "models/OX044355.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245931.1",
+    "url": "models/OZ245931.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245839.1",
+    "url": "models/OZ245839.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ252014.1",
+    "url": "models/OZ252014.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245756.1",
+    "url": "models/OZ245756.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ243102.1",
+    "url": "models/OZ243102.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245746.1",
+    "url": "models/OZ245746.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OY829375.1",
+    "url": "models/OY829375.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GIR21845.1",
+    "url": "models/GIR21845.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OX044357.1",
+    "url": "models/OX044357.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ244159.1",
+    "url": "models/OZ244159.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245719.1",
+    "url": "models/OZ245719.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGD16574.1",
+    "url": "models/GGD16574.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP136574.1",
+    "url": "models/CP136574.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245731.1",
+    "url": "models/OZ245731.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP073016.1",
+    "url": "models/CP073016.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGH88435.1",
+    "url": "models/GGH88435.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGF73035.1",
+    "url": "models/GGF73035.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GCD77160.1",
+    "url": "models/GCD77160.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BDD16568.1",
+    "url": "models/BDD16568.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OX044356.1",
+    "url": "models/OX044356.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GCD80454.1",
+    "url": "models/GCD80454.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGC30146.1",
+    "url": "models/GGC30146.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OX044362.1",
+    "url": "models/OX044362.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ252262.1",
+    "url": "models/OZ252262.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ245886.1",
+    "url": "models/OZ245886.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OY829281.1",
+    "url": "models/OY829281.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ243096.1",
+    "url": "models/OZ243096.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GHB23597.1",
+    "url": "models/GHB23597.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP121312.1",
+    "url": "models/CP121312.1.pdb",
+    "clusters": [
+      "Cluster 0"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGB53743.1",
+    "url": "models/GGB53743.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYY97977.1",
+    "url": "models/OYY97977.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYY69292.1",
+    "url": "models/OYY69292.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PBN43411.1",
+    "url": "models/PBN43411.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OHC98024.1",
+    "url": "models/OHC98024.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OHD05260.1",
+    "url": "models/OHD05260.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "EXS71053.1",
+    "url": "models/EXS71053.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYZ61278.1",
+    "url": "models/OYZ61278.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "AOF96519.1",
+    "url": "models/AOF96519.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZA83208.1",
+    "url": "models/OZA83208.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RFU11683.1",
+    "url": "models/RFU11683.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OAN57215.1",
+    "url": "models/OAN57215.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KTF68840.1",
+    "url": "models/KTF68840.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PVX30487.1",
+    "url": "models/PVX30487.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "CP136575.1",
+    "url": "models/CP136575.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KPF93223.1",
+    "url": "models/KPF93223.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KKC31033.1",
+    "url": "models/KKC31033.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KIN73522.1",
+    "url": "models/KIN73522.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGD04646.1",
+    "url": "models/GGD04646.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "SN06pond07",
+    "url": "models/SN06pond07.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PIX67554.1",
+    "url": "models/PIX67554.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RRQ51041.1",
+    "url": "models/RRQ51041.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PZN99150.1",
+    "url": "models/PZN99150.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQM62812.1",
+    "url": "models/KQM62812.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ252211.1",
+    "url": "models/OZ252211.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "L1DT4B",
+    "url": "models/L1DT4B.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "L1BD2",
+    "url": "models/L1BD2.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "VOU06NAS01",
+    "url": "models/VOU06NAS01.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PJK06NCP03",
+    "url": "models/PJK06NCP03.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "VVT24364.1",
+    "url": "models/VVT24364.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYX57372.1",
+    "url": "models/OYX57372.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "S2H28",
+    "url": "models/S2H28.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "9OR8",
+    "url": "models/9OR8.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "JWL2",
+    "url": "models/JWL2.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "JOBD13",
+    "url": "models/JOBD13.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BCA61338.1",
+    "url": "models/BCA61338.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGE22526.1",
+    "url": "models/GGE22526.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "JPL28",
+    "url": "models/JPL28.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQN28516.1",
+    "url": "models/KQN28516.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RXD06694.1",
+    "url": "models/RXD06694.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PZO76000.1",
+    "url": "models/PZO76000.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "S3H21",
+    "url": "models/S3H21.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGE78254.1",
+    "url": "models/GGE78254.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYX73886.1",
+    "url": "models/OYX73886.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYW29954.1",
+    "url": "models/OYW29954.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PZO09322.1",
+    "url": "models/PZO09322.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "EDP63929.1",
+    "url": "models/EDP63929.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TVS12205.1",
+    "url": "models/TVS12205.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TVQ33031.1",
+    "url": "models/TVQ33031.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "26OR1",
+    "url": "models/26OR1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGA49527.1",
+    "url": "models/GGA49527.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQN08864.1",
+    "url": "models/KQN08864.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "JOOD22",
+    "url": "models/JOOD22.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BCA60302.1",
+    "url": "models/BCA60302.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TJZ84602.1",
+    "url": "models/TJZ84602.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "ODT58092.1",
+    "url": "models/ODT58092.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TGN61835.1",
+    "url": "models/TGN61835.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "M1U20",
+    "url": "models/M1U20.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "J1U1",
+    "url": "models/J1U1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "SKI02AP11",
+    "url": "models/SKI02AP11.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "MTK02EP03",
+    "url": "models/MTK02EP03.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "QBM75193.1",
+    "url": "models/QBM75193.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GHH23836.1",
+    "url": "models/GHH23836.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "SKI02CP10",
+    "url": "models/SKI02CP10.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "SKI02AS03",
+    "url": "models/SKI02AS03.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TPG52660.1",
+    "url": "models/TPG52660.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "LKI02BS01",
+    "url": "models/LKI02BS01.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TPG09633.1",
+    "url": "models/TPG09633.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OYX52601.1",
+    "url": "models/OYX52601.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RYD68531.1",
+    "url": "models/RYD68531.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "AHE52940.1",
+    "url": "models/AHE52940.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "SSN206AS01",
+    "url": "models/SSN206AS01.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "L1BT3",
+    "url": "models/L1BT3.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "POU06NBS01",
+    "url": "models/POU06NBS01.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "POU06NCP01",
+    "url": "models/POU06NCP01.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "L1CD2B",
+    "url": "models/L1CD2B.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQM73760.1",
+    "url": "models/KQM73760.1.pdb",
+    "clusters": [
+      "Cluster 1"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PND56870.1",
+    "url": "models/PND56870.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQP67191.1",
+    "url": "models/KQP67191.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KAA0928310.1",
+    "url": "models/KAA0928310.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BBX67830.1",
+    "url": "models/BBX67830.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGF14204.1",
+    "url": "models/GGF14204.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OJY43810.1",
+    "url": "models/OJY43810.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQQ42193.1",
+    "url": "models/KQQ42193.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TVS86872.1",
+    "url": "models/TVS86872.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "BDX33020.1",
+    "url": "models/BDX33020.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GLP76198.1",
+    "url": "models/GLP76198.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TPG37408.1",
+    "url": "models/TPG37408.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OFE15031.1",
+    "url": "models/OFE15031.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX33038.1",
+    "url": "models/GDX33038.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX17393.1",
+    "url": "models/GDX17393.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KQY09766.1",
+    "url": "models/KQY09766.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PVE17425.1",
+    "url": "models/PVE17425.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PHX60469.1",
+    "url": "models/PHX60469.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PPB45911.1",
+    "url": "models/PPB45911.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGF92574.1",
+    "url": "models/GGF92574.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "POH71228.1",
+    "url": "models/POH71228.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "POH64568.1",
+    "url": "models/POH64568.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "ASD22500.1",
+    "url": "models/ASD22500.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TPV25452.1",
+    "url": "models/TPV25452.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD93427.1",
+    "url": "models/TFD93427.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PXA72408.1",
+    "url": "models/PXA72408.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "ANP74617.1",
+    "url": "models/ANP74617.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC17038.1",
+    "url": "models/TFC17038.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFB96360.1",
+    "url": "models/TFB96360.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFB90653.1",
+    "url": "models/TFB90653.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZE29894.1",
+    "url": "models/OZE29894.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RFA24929.1",
+    "url": "models/RFA24929.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RFA18018.1",
+    "url": "models/RFA18018.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RFA12328.1",
+    "url": "models/RFA12328.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PPF85931.1",
+    "url": "models/PPF85931.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "AWG02835.1",
+    "url": "models/AWG02835.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "AJW80239.1",
+    "url": "models/AJW80239.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC16264.1",
+    "url": "models/TFC16264.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "QHO71000.1",
+    "url": "models/QHO71000.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "AZI59391.1",
+    "url": "models/AZI59391.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TIH31229.1",
+    "url": "models/TIH31229.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGL05201.1",
+    "url": "models/GGL05201.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KAA9111499.1",
+    "url": "models/KAA9111499.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RFA18400.1",
+    "url": "models/RFA18400.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZE95541.1",
+    "url": "models/OZE95541.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFB99530.1",
+    "url": "models/TFB99530.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC80037.1",
+    "url": "models/TFC80037.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC85940.1",
+    "url": "models/TFC85940.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC91058.1",
+    "url": "models/TFC91058.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC31694.1",
+    "url": "models/TFC31694.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFB54523.1",
+    "url": "models/TFB54523.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OUM42966.1",
+    "url": "models/OUM42966.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC80606.1",
+    "url": "models/TFC80606.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD76797.1",
+    "url": "models/TFD76797.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD76712.1",
+    "url": "models/TFD76712.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD28381.1",
+    "url": "models/TFD28381.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFB81715.1",
+    "url": "models/TFB81715.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD08492.1",
+    "url": "models/TFD08492.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD24290.1",
+    "url": "models/TFD24290.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFC25459.1",
+    "url": "models/TFC25459.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PPB48466.1",
+    "url": "models/PPB48466.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFD85230.1",
+    "url": "models/TFD85230.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RJT90601.1",
+    "url": "models/RJT90601.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TFB89747.1",
+    "url": "models/TFB89747.1.pdb",
+    "clusters": [
+      "Cluster 2"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KRO49903.1",
+    "url": "models/KRO49903.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KRO51529.1",
+    "url": "models/KRO51529.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TSA20550.1",
+    "url": "models/TSA20550.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX21556.1",
+    "url": "models/GDX21556.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TRZ73044.1",
+    "url": "models/TRZ73044.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "QLL25445.1",
+    "url": "models/QLL25445.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "QLL24047.1",
+    "url": "models/QLL24047.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KRO36646.1",
+    "url": "models/KRO36646.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "KRO30341.1",
+    "url": "models/KRO30341.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX24649.1",
+    "url": "models/GDX24649.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX22696.1",
+    "url": "models/GDX22696.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GDX16682.1",
+    "url": "models/GDX16682.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PHX75877.1",
+    "url": "models/PHX75877.1.pdb",
+    "clusters": [
+      "Cluster 3"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RMH64933.1",
+    "url": "models/RMH64933.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ94854.1",
+    "url": "models/PSQ94854.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "ABC44767.1",
+    "url": "models/ABC44767.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PQJ33473.1",
+    "url": "models/PQJ33473.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ94898.1",
+    "url": "models/PSQ94898.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ65031.1",
+    "url": "models/PSQ65031.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ66410.1",
+    "url": "models/PSQ66410.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PEN15075.1",
+    "url": "models/PEN15075.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PSQ95756.1",
+    "url": "models/PSQ95756.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PJF31817.1",
+    "url": "models/PJF31817.1.pdb",
+    "clusters": [
+      "Cluster 4"
+    ],
+    "environment": []
+  },
+  {
+    "id": "RZM77228.1",
+    "url": "models/RZM77228.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "TVP63961.1",
+    "url": "models/TVP63961.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "ESA36503.1",
+    "url": "models/ESA36503.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGJ70114.1",
+    "url": "models/GGJ70114.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "GGR19346.1",
+    "url": "models/GGR19346.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ252009.1",
+    "url": "models/OZ252009.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "ANE44876.1",
+    "url": "models/ANE44876.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "PJF35373.1",
+    "url": "models/PJF35373.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  },
+  {
+    "id": "OZ252036.1",
+    "url": "models/OZ252036.1.pdb",
+    "clusters": [
+      "Cluster 5"
+    ],
+    "environment": []
+  }
+]

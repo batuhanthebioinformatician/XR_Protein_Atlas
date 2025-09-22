@@ -32,7 +32,8 @@
 
   <div id="metadata">
     <strong>ID:</strong> <span id="meta-id"></span><br>
-    <strong>Cluster:</strong> <span id="meta-cluster"></span>
+    <strong>Cluster:</strong> <span id="meta-cluster"></span><br>
+    <strong>Type:</strong> <span id="meta-type"></span>
   </div>
 
   <script>
@@ -270,7 +271,6 @@
   { id: "PHX75877.1", cluster: 3 },
   { id: "RMH64933.1", cluster: 4 },
   { id: "PSQ94854.1", cluster: 4 },
-  { id: "ABC44767.1", cluster: 4 },
   { id: "PQJ33473.1", cluster: 4 },
   { id: "PSQ94898.1", cluster: 4 },
   { id: "PSQ65031.1", cluster: 4 },
@@ -286,8 +286,15 @@
   { id: "OZ252009.1", cluster: 5 },
   { id: "ANE44876.1", cluster: 5 },
   { id: "PJF35373.1", cluster: 5 },
-  { id: "OZ252036.1", cluster: 5 }
-];
+  { id: "OZ252036.1", cluster: 5 },
+
+
+      // Experimental CIF structures
+      { id: "Kin4B8", cluster: 1, format: "cif", experimental: true },
+      { id: "ABC44767.1", cluster: 4, format: "cif", experimental: true }
+
+      
+    ];
 
     let filteredProteins = proteins;
     let currentIndex = 0;
@@ -306,9 +313,12 @@
       const entry = filteredProteins[index];
       if (!entry) return;
 
-      const pdbPath = `models/${entry.id}.pdb`;
+      // Decide extension
+      const ext = entry.format === "cif" ? "cif" : "pdb";
+      const filePath = `models/${entry.id}.${ext}`;
+
       viewer.clear();
-      $3Dmol.download(pdbPath, viewer, {}, function() {
+      $3Dmol.download(filePath, viewer, { format: ext }, function() {
         viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
         viewer.zoomTo();
         viewer.render();
@@ -316,6 +326,7 @@
 
       document.getElementById("meta-id").innerText = entry.id;
       document.getElementById("meta-cluster").innerText = entry.cluster;
+      document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
     }
 
     function createClusterButtons() {
