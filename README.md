@@ -17,7 +17,7 @@ This tool allows researchers and students to visualize ~250 modeled XR proteins,
 
 ## Deployment
 This project is deployed on **GitHub Pages**:  
-👉 [XR Protein Atlas](https://batuhanthebioinformatician.github.io/XR_Protein_Atlas/)
+[XR Protein Atlas](https://batuhanthebioinformatician.github.io/XR_Protein_Atlas/)
 
 ## Local Usage
 To run locally:
