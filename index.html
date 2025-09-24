@@ -327,29 +327,34 @@
       const ext = entry.format === "cif" ? "cif" : "pdb";
       const filePath = `models/${entry.id}.${ext}`;
 
-      viewer.clear();
-      $3Dmol.download(filePath, viewer, { format: ext }, function() {
-        viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
-
-        // thin invisible sticks, but hoverable
-        viewer.setStyle({}, { 
-          stick: { radius:0.1, alpha:0, hoverable:true, 
-            callback:function(atom) {
-              if(atom) {
-                showTooltip(atom);
-                // highlight atom as red ball
-                viewer.setStyle({}, { cartoon:{color:'spectrum'}, stick:{radius:0.1, alpha:0, hoverable:true, callback:arguments.callee}});
-                viewer.setStyle({resi: atom.resi, chain: atom.chain}, {sphere:{color:"red", radius:0.6}});
-                viewer.render();
-              }
-            },
-            hover_callback:function(atom) { hideTooltip(); }
-          } 
-        });
-
-        viewer.zoomTo();
+viewer.setStyle({}, {
+  stick: {
+    radius: 0.2,
+    hoverable: true,
+    hover_callback: function(atom, viewer, event, container) {
+      if(atom) {
+        // show tooltip
+        let tooltip = document.getElementById("tooltip");
+        tooltip.style.display = "block";
+        tooltip.style.left = (event.pageX + 12) + "px";
+        tooltip.style.top = (event.pageY + 12) + "px";
+        tooltip.innerHTML = atom.resn + " " + atom.resi + " (" + atom.chain + ")";
+        
+        // highlight atom
+        viewer.addStyle({resi: atom.resi, chain: atom.chain}, {sphere:{color:"red", radius:0.5}});
         viewer.render();
-      });
+      }
+    },
+    unhover_callback: function(atom, viewer) {
+      // hide tooltip
+      document.getElementById("tooltip").style.display = "none";
+      // reset style
+      viewer.setStyle({}, {cartoon:{color:'spectrum'}, stick:{radius:0.2, hoverable:true}});
+      viewer.render();
+    }
+  }
+});
+
 
       document.getElementById("meta-id").innerText = entry.id;
       document.getElementById("meta-cluster").innerText = entry.cluster;
