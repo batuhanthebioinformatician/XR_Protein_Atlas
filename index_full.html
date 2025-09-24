@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,6 @@
     input, button { padding:6px 10px; border-radius:6px; border:1px solid #2b3648; background:#1f2937; color:#e6edf3; }
     button:hover { background:#2b3648; cursor:pointer; }
 
-    /* Tooltip */
     #tooltip {
       position: fixed;
       display: none;
@@ -52,7 +50,6 @@
   </div>
 
   <script>
-    // --- Your proteins list (truncated here, keep full in your real file) ---
     let proteins = [
   { id: "BDU10525.1", cluster: -1 },
   { id: "PSQ71425.1", cluster: -1 },
@@ -319,9 +316,7 @@
     function init() {
       viewer = $3Dmol.createViewer("viewer", { backgroundColor: "white" });
       createClusterButtons();
-      if (proteins.length > 0) {
-        loadProtein(0);
-      }
+      if (proteins.length > 0) loadProtein(0);
     }
 
     function loadProtein(index) {
@@ -334,14 +329,26 @@
 
       viewer.clear();
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
-        // Cartoon for structure + sticks for hover
+        viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
+
+        // thin invisible sticks, but hoverable
         viewer.setStyle({}, { 
-          cartoon: { color: 'spectrum' }, 
-          stick: { radius:0.2, hoverable:true }
+          stick: { radius:0.1, alpha:0, hoverable:true, 
+            callback:function(atom) {
+              if(atom) {
+                showTooltip(atom);
+                // highlight atom as red ball
+                viewer.setStyle({}, { cartoon:{color:'spectrum'}, stick:{radius:0.1, alpha:0, hoverable:true, callback:arguments.callee}});
+                viewer.setStyle({resi: atom.resi, chain: atom.chain}, {sphere:{color:"red", radius:0.6}});
+                viewer.render();
+              }
+            },
+            hover_callback:function(atom) { hideTooltip(); }
+          } 
         });
+
         viewer.zoomTo();
         viewer.render();
-        setupHoverTooltip();
       });
 
       document.getElementById("meta-id").innerText = entry.id;
@@ -349,36 +356,22 @@
       document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
     }
 
-    function setupHoverTooltip() {
+    function showTooltip(atom) {
       const tooltip = document.getElementById("tooltip");
-      viewer.removeAllListeners("hover");
+      tooltip.style.display = "block";
+      tooltip.style.left = (event.pageX + 12) + "px";
+      tooltip.style.top = (event.pageY + 12) + "px";
+      tooltip.innerHTML = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) - ${atom.atom}`;
+    }
 
-      viewer.addListener("hover", function(atom, viewer, event, container) {
-        if (atom) {
-          let aaInfo = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) - ${atom.atom}`;
-          tooltip.style.display = "block";
-          tooltip.style.left = (event.pageX + 12) + "px";
-          tooltip.style.top = (event.pageY + 12) + "px";
-          tooltip.innerHTML = aaInfo;
-
-          // highlight residue
-          viewer.setStyle({}, { cartoon:{color:'spectrum'}, stick:{radius:0.2, hoverable:true} });
-          viewer.setStyle({resi: atom.resi, chain: atom.chain}, {stick:{color:"red", radius:0.4}});
-          viewer.render();
-        } else {
-          tooltip.style.display = "none";
-          // reset to default
-          viewer.setStyle({}, { cartoon:{color:'spectrum'}, stick:{radius:0.2, hoverable:true} });
-          viewer.render();
-        }
-      });
+    function hideTooltip() {
+      document.getElementById("tooltip").style.display = "none";
     }
 
     function createClusterButtons() {
       const container = document.getElementById("clusterButtons");
       container.innerHTML = "";
-      const clusters = [...new Set(proteins.map(p => p.cluster))];
-      clusters.sort((a, b) => a - b);
+      const clusters = [...new Set(proteins.map(p => p.cluster))].sort((a, b) => a - b);
 
       clusters.forEach(cluster => {
         const btn = document.createElement("button");
@@ -392,21 +385,18 @@
 
       const allBtn = document.createElement("button");
       allBtn.textContent = "All";
-      allBtn.onclick = () => {
-        filteredProteins = proteins;
-        loadProtein(0);
-      };
+      allBtn.onclick = () => { filteredProteins = proteins; loadProtein(0); };
       container.insertBefore(allBtn, container.firstChild);
     }
 
     document.getElementById("prevBtn").onclick = () => {
-      if (filteredProteins.length === 0) return;
+      if (!filteredProteins.length) return;
       const newIndex = (currentIndex - 1 + filteredProteins.length) % filteredProteins.length;
       loadProtein(newIndex);
     };
 
     document.getElementById("nextBtn").onclick = () => {
-      if (filteredProteins.length === 0) return;
+      if (!filteredProteins.length) return;
       const newIndex = (currentIndex + 1) % filteredProteins.length;
       loadProtein(newIndex);
     };
@@ -417,12 +407,8 @@
         p.id.toLowerCase().includes(query) ||
         String(p.cluster).toLowerCase().includes(query)
       );
-      if (idx !== -1) {
-        filteredProteins = proteins;
-        loadProtein(idx);
-      } else {
-        alert("No match found");
-      }
+      if (idx !== -1) { filteredProteins = proteins; loadProtein(idx); }
+      else alert("No match found");
     };
 
     window.onload = init;
