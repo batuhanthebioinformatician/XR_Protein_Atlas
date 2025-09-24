@@ -14,6 +14,17 @@
     #metadata { padding:10px; background:#121826; min-height:15vh; }
     input, button { padding:6px 10px; border-radius:6px; border:1px solid #2b3648; background:#1f2937; color:#e6edf3; }
     button:hover { background:#2b3648; cursor:pointer; }
+    #tooltip {
+      position:absolute;
+      display:none;
+      background:#222;
+      color:#fff;
+      padding:4px 6px;
+      border-radius:4px;
+      font-size:12px;
+      pointer-events:none;
+      z-index:10;
+    }
   </style>
 </head>
 <body>
@@ -29,6 +40,7 @@
   </header>
 
   <div id="viewer"></div>
+  <div id="tooltip"></div>
 
   <div id="metadata">
     <strong>ID:</strong> <span id="meta-id"></span><br>
@@ -313,7 +325,6 @@
       const entry = filteredProteins[index];
       if (!entry) return;
 
-      // Decide extension
       const ext = entry.format === "cif" ? "cif" : "pdb";
       const filePath = `models/${entry.id}.${ext}`;
 
@@ -322,11 +333,28 @@
         viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
         viewer.zoomTo();
         viewer.render();
+        setupHoverTooltip();
       });
 
       document.getElementById("meta-id").innerText = entry.id;
       document.getElementById("meta-cluster").innerText = entry.cluster;
       document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
+    }
+
+    function setupHoverTooltip() {
+      const tooltip = document.getElementById("tooltip");
+      viewer.removeAllListeners("hover");
+      viewer.addListener("hover", function(atom, viewer, event, container) {
+        if (atom) {
+          let aaInfo = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) - ${atom.atom}`;
+          tooltip.style.display = "block";
+          tooltip.style.left = (event.pageX + 10) + "px";
+          tooltip.style.top = (event.pageY + 10) + "px";
+          tooltip.innerHTML = aaInfo;
+        } else {
+          tooltip.style.display = "none";
+        }
+      });
     }
 
     function createClusterButtons() {
