@@ -13,7 +13,7 @@ This tool allows researchers and students to visualize ~250 modeled XR proteins,
 ## Data
 - **Protein structures (.pdb)** were modeled computationally from XR sequences.  
 - Sequences are classified into **clusters (-1 to 5)** according to machine learning–based analysis of BLOSUM45 similarity and polymorphisms.  
-- Strains include Arctic, temperate, and plant-associated *Sphingomonas faeni* isolates, plus reference XR sequences from NCBI.
+- Strains include Arctic, temperate, and plant-associated *Sphingomonas faeni* isolates, and additional XR sequences from NCBI.
 
 ## Deployment
 This project is deployed on **GitHub Pages**:  
