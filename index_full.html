@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>XR Protein Atlas Viewer (3Dmol.js)</title>
-  <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+  <script src="https://3dmol.org/build/3Dmol-min.js?v=latest"></script>
   <style>
     body { margin:0; font-family: Arial, sans-serif; background:#0b0e14; color:#e6edf3; }
     header { padding:10px; background:#121826; display:flex; flex-direction:column; gap:10px; }
@@ -15,7 +16,7 @@
     input, button { padding:6px 10px; border-radius:6px; border:1px solid #2b3648; background:#1f2937; color:#e6edf3; }
     button:hover { background:#2b3648; cursor:pointer; }
 
-    /* Tooltip styles */
+    /* Tooltip */
     #tooltip {
       position: fixed;
       display: none;
@@ -51,6 +52,7 @@
   </div>
 
   <script>
+    // --- Your proteins list (keep the full one here) ---
     let proteins = [
   { id: "BDU10525.1", cluster: -1 },
   { id: "PSQ71425.1", cluster: -1 },
@@ -346,6 +348,7 @@
     function setupHoverTooltip() {
       const tooltip = document.getElementById("tooltip");
       viewer.removeAllListeners("hover");
+
       viewer.addListener("hover", function(atom, viewer, event, container) {
         if (atom) {
           let aaInfo = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) - ${atom.atom}`;
