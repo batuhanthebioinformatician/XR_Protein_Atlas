@@ -51,7 +51,7 @@
   </div>
 
   <script>
-    // --- Your proteins list (keep the full one here) ---
+    // --- Your proteins list (truncated here, keep full in your real file) ---
     let proteins = [
   { id: "BDU10525.1", cluster: -1 },
   { id: "PSQ71425.1", cluster: -1 },
@@ -311,7 +311,6 @@
       
     ];
 
-
     let filteredProteins = proteins;
     let currentIndex = 0;
     let viewer;
@@ -334,9 +333,10 @@
 
       viewer.clear();
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
+        // Cartoon for structure + sticks for hover
         viewer.setStyle({}, { 
-          cartoon: { color: 'spectrum', hoverable:true }, 
-          stick: { radius:0.3, hoverable:true } 
+          cartoon: { color: 'spectrum' }, 
+          stick: { radius:0.2, hoverable:true }
         });
         viewer.zoomTo();
         viewer.render();
@@ -359,8 +359,16 @@
           tooltip.style.left = (event.pageX + 12) + "px";
           tooltip.style.top = (event.pageY + 12) + "px";
           tooltip.innerHTML = aaInfo;
+
+          // highlight residue
+          viewer.setStyle({}, { cartoon:{color:'spectrum'}, stick:{radius:0.2, hoverable:true} });
+          viewer.setStyle({resi: atom.resi, chain: atom.chain}, {stick:{color:"red", radius:0.4}});
+          viewer.render();
         } else {
           tooltip.style.display = "none";
+          // reset to default
+          viewer.setStyle({}, { cartoon:{color:'spectrum'}, stick:{radius:0.2, hoverable:true} });
+          viewer.render();
         }
       });
     }
