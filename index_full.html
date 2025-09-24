@@ -312,6 +312,7 @@
       
     ];
 
+
     let filteredProteins = proteins;
     let currentIndex = 0;
     let viewer;
@@ -334,7 +335,10 @@
 
       viewer.clear();
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
-        viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
+        viewer.setStyle({}, { 
+          cartoon: { color: 'spectrum', hoverable:true }, 
+          stick: { radius:0.3, hoverable:true } 
+        });
         viewer.zoomTo();
         viewer.render();
         setupHoverTooltip();
