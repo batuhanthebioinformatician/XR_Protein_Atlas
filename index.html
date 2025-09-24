@@ -14,16 +14,18 @@
     #metadata { padding:10px; background:#121826; min-height:15vh; }
     input, button { padding:6px 10px; border-radius:6px; border:1px solid #2b3648; background:#1f2937; color:#e6edf3; }
     button:hover { background:#2b3648; cursor:pointer; }
+
+    /* Tooltip styles */
     #tooltip {
-      position:absolute;
-      display:none;
-      background:#222;
-      color:#fff;
-      padding:4px 6px;
-      border-radius:4px;
-      font-size:12px;
-      pointer-events:none;
-      z-index:10;
+      position: fixed;
+      display: none;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 9999;
     }
   </style>
 </head>
@@ -348,8 +350,8 @@
         if (atom) {
           let aaInfo = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) - ${atom.atom}`;
           tooltip.style.display = "block";
-          tooltip.style.left = (event.pageX + 10) + "px";
-          tooltip.style.top = (event.pageY + 10) + "px";
+          tooltip.style.left = (event.pageX + 12) + "px";
+          tooltip.style.top = (event.pageY + 12) + "px";
           tooltip.innerHTML = aaInfo;
         } else {
           tooltip.style.display = "none";
