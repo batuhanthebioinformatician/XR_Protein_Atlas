@@ -592,17 +592,36 @@
 
         // enable hover tooltips
         const proteinID = entry.id;
-        viewer.setHoverable({}, true,
-          function(atom, viewer, event, container) {
-            if(atom) {
-              tooltip.style.display = "block";
-              tooltip.style.left = (event.pageX + 12) + "px";
-              tooltip.style.top  = (event.pageY + 12) + "px";
-              tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
-              viewer.addStyle({resi: atom.resi, chain: atom.chain}, {cartoon:{color:'red'}});
-              viewer.render();
-            }
-          },
+       viewer.setHoverable({}, true,
+  function(atom, viewer, event, container) {
+    if(atom) {
+      tooltip.style.display = "block";
+      tooltip.style.left = (event.pageX + 12) + "px";
+      tooltip.style.top  = (event.pageY + 12) + "px";
+      tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
+
+      // add temporary red stick highlight
+      viewer.addStyle({resi: atom.resi, chain: atom.chain}, {stick:{color:'red', radius:0.4}});
+      viewer.render();
+    }
+  },
+  function(atom, viewer) {
+    tooltip.style.display = "none";
+
+    // redraw baseline styles
+    viewer.setStyle({}, { cartoon: { color: 'gray' } });
+    if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
+      viewer.addStyle({}, { cartoon: { color: 'green' } });
+    }
+    if(conservedResidues[proteinID]) {
+      const res = conservedResidues[proteinID];
+      viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
+      viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
+    }
+    viewer.render();
+  }
+);
+
           function(atom, viewer) {
             tooltip.style.display = "none";
             // redraw baseline styles
