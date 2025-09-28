@@ -604,8 +604,8 @@ let filteredProteins = proteins;
           viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
         }
 
-        
         // enable hover tooltips
+        const proteinID = entry.id;  // capture ID for hover callbacks
         viewer.setHoverable({}, true,
           function(atom, viewer, event, container) {
             if(atom) {
@@ -613,7 +613,7 @@ let filteredProteins = proteins;
               tooltip.style.display = "block";
               tooltip.style.left = (event.pageX + 12) + "px";
               tooltip.style.top  = (event.pageY + 12) + "px";
-              tooltip.innerHTML = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) — ${atom.atom}`;
+              tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
 
               // add temporary red highlight
               viewer.addStyle({resi: atom.resi, chain: atom.chain}, {cartoon:{color:'red'}});
@@ -626,25 +626,15 @@ let filteredProteins = proteins;
 
             // restore base + conserved coloring
             viewer.setStyle({}, { cartoon: { color: 'gray' } });
-            if(entry.id === "ABC44767.1" || entry.id === "Kin4B8") {
+            if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
               viewer.setStyle({}, { cartoon: { color: 'green' } });
             }
-            if(conservedResidues[entry.id]) {
-              const res = conservedResidues[entry.id];
+            if(conservedResidues[proteinID]) {
+              const res = conservedResidues[proteinID];
               viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
               viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
             }
             viewer.render();
-          }
-        );
-              tooltip.style.display = "block";
-              tooltip.style.left = (event.pageX + 12) + "px";
-              tooltip.style.top  = (event.pageY + 12) + "px";
-              tooltip.innerHTML = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) — ${atom.atom}`;
-            }
-          },
-          function(atom, viewer) {
-            document.getElementById("tooltip").style.display = "none";
           }
         );
 
