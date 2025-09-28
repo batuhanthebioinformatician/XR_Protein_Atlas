@@ -589,8 +589,8 @@ let filteredProteins = proteins;
 
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
 
-        // default gray
-        viewer.setStyle({}, baseStyle);
+        // base gray
+        viewer.setStyle({}, { cartoon: { color: 'gray' } });
 
         // special references green
         if(entry.id === "ABC44767.1" || entry.id === "Kin4B8") {
@@ -603,6 +603,50 @@ let filteredProteins = proteins;
           viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
           viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
         }
+
+        
+        // enable hover tooltips
+        viewer.setHoverable({}, true,
+          function(atom, viewer, event, container) {
+            if(atom) {
+              const tooltip = document.getElementById("tooltip");
+              tooltip.style.display = "block";
+              tooltip.style.left = (event.pageX + 12) + "px";
+              tooltip.style.top  = (event.pageY + 12) + "px";
+              tooltip.innerHTML = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) — ${atom.atom}`;
+
+              // add temporary red highlight
+              viewer.addStyle({resi: atom.resi, chain: atom.chain}, {cartoon:{color:'red'}});
+              viewer.render();
+            }
+          },
+          function(atom, viewer) {
+            const tooltip = document.getElementById("tooltip");
+            tooltip.style.display = "none";
+
+            // restore base + conserved coloring
+            viewer.setStyle({}, { cartoon: { color: 'gray' } });
+            if(entry.id === "ABC44767.1" || entry.id === "Kin4B8") {
+              viewer.setStyle({}, { cartoon: { color: 'green' } });
+            }
+            if(conservedResidues[entry.id]) {
+              const res = conservedResidues[entry.id];
+              viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
+              viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
+            }
+            viewer.render();
+          }
+        );
+              tooltip.style.display = "block";
+              tooltip.style.left = (event.pageX + 12) + "px";
+              tooltip.style.top  = (event.pageY + 12) + "px";
+              tooltip.innerHTML = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) — ${atom.atom}`;
+            }
+          },
+          function(atom, viewer) {
+            document.getElementById("tooltip").style.display = "none";
+          }
+        );
 
 
         // enable atom picking over the whole model (works even with only cartoon drawn)
