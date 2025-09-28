@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>XR Protein Atlas Viewer (3Dmol.js)</title>
-  <!-- use latest build -->
   <script src="https://3dmol.org/build/3Dmol-min.js?v=latest"></script>
   <style>
     body{margin:0;font-family:Arial, sans-serif;background:#0b0e14;color:#e6edf3}
@@ -15,7 +14,6 @@
     #metadata{padding:10px;background:#121826;min-height:15vh}
     input,button{padding:6px 10px;border-radius:6px;border:1px solid #2b3648;background:#1f2937;color:#e6edf3}
     button:hover{background:#2b3648;cursor:pointer}
-    /* floating tooltip */
     #tooltip{
       position:fixed; display:none; z-index:9999;
       background:rgba(0,0,0,.85); color:#fff; padding:4px 6px; border-radius:4px; font-size:12px;
@@ -45,9 +43,9 @@
   </div>
 
   <script>
-    /* === Your protein list (kept as you pasted) === */
+    /* === Proteins list (full) === */
     let proteins = [
-      { id: "BDU10525.1", cluster: -1 },
+     { id: "BDU10525.1", cluster: -1 },
       { id: "PSQ71425.1", cluster: -1 },
       { id: "KGA09086.1", cluster: -1 },
       { id: "RZP28624.1", cluster: -1 },
@@ -554,21 +552,10 @@
   "TVP63961.1": { gly: 158, lys: 237 },
   "ESA36503.1": { gly: 158, lys: 237 },
 };
-let filteredProteins = proteins;
+    let filteredProteins = proteins;
     let currentIndex = 0;
     let viewer;
     const tooltip = document.getElementById('tooltip');
-
-    // base style shown at all times
-    const baseStyle = { cartoon: { color: 'gray' } };
-    // highlight style for hovered residue
-    const highlightStyle = { stick: { color: 'red', radius: 0.45 } };
-
-    function getPageXY(evt){
-      const x = (evt && (evt.pageX || (evt.clientX + window.scrollX))) || 0;
-      const y = (evt && (evt.pageY || (evt.clientY + window.scrollY))) || 0;
-      return [x,y];
-    }
 
     function init() {
       viewer = $3Dmol.createViewer("viewer", { backgroundColor: "white" });
@@ -588,7 +575,6 @@ let filteredProteins = proteins;
       tooltip.style.display = 'none';
 
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
-
         // base gray
         viewer.setStyle({}, { cartoon: { color: 'gray' } });
 
@@ -605,28 +591,21 @@ let filteredProteins = proteins;
         }
 
         // enable hover tooltips
-        
-        const proteinID = entry.id;  // capture ID for hover callbacks
-
+        const proteinID = entry.id;
         viewer.setHoverable({}, true,
           function(atom, viewer, event, container) {
             if(atom) {
-              const tooltip = document.getElementById("tooltip");
               tooltip.style.display = "block";
               tooltip.style.left = (event.pageX + 12) + "px";
               tooltip.style.top  = (event.pageY + 12) + "px";
               tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
-
-              // add temporary red highlight without clearing base styles
               viewer.addStyle({resi: atom.resi, chain: atom.chain}, {cartoon:{color:'red'}});
               viewer.render();
             }
           },
           function(atom, viewer) {
-            const tooltip = document.getElementById("tooltip");
             tooltip.style.display = "none";
-
-            // On unhover: redraw base coloring (gray), conserved residues (blue), and references (green)
+            // redraw baseline styles
             viewer.setStyle({}, { cartoon: { color: 'gray' } });
             if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
               viewer.addStyle({}, { cartoon: { color: 'green' } });
@@ -639,64 +618,11 @@ let filteredProteins = proteins;
             viewer.render();
           }
         );
-              tooltip.style.display = "block";
-              tooltip.style.left = (event.pageX + 12) + "px";
-              tooltip.style.top  = (event.pageY + 12) + "px";
-              tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
-
-              // add temporary red highlight
-              viewer.addStyle({resi: atom.resi, chain: atom.chain}, {cartoon:{color:'red'}});
-              viewer.render();
-            }
-          },
-          function(atom, viewer) {
-            const tooltip = document.getElementById("tooltip");
-            tooltip.style.display = "none";
-
-            // restore base + conserved coloring
-            viewer.setStyle({}, { cartoon: { color: 'gray' } });
-            if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
-              viewer.setStyle({}, { cartoon: { color: 'green' } });
-            }
-            if(conservedResidues[proteinID]) {
-              const res = conservedResidues[proteinID];
-              viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
-              viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
-            }
-            viewer.render();
-          }
-        );
-
-
-        // enable atom picking over the whole model (works even with only cartoon drawn)
-        viewer.setHoverable({}, true,
-          // hover in
-          function(atom, v, event, container) {
-            if (!atom) return;
-            const [px, py] = getPageXY(event);
-            tooltip.style.display = 'block';
-            tooltip.style.left = (px + 12) + 'px';
-            tooltip.style.top  = (py + 12) + 'px';
-            tooltip.innerHTML  = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) — ${atom.atom}`;
-
-            // redraw: base + highlight current residue
-            v.setStyle({}, baseStyle);
-            v.addStyle({resi: atom.resi, chain: atom.chain}, highlightStyle);
-            v.render();
-          },
-          // hover out
-          function(atom, v) {
-            tooltip.style.display = 'none';
-            v.setStyle({}, baseStyle);
-            v.render();
-          }
-        );
 
         viewer.zoomTo();
         viewer.render();
       });
 
-      // update meta
       document.getElementById("meta-id").innerText = entry.id;
       document.getElementById("meta-cluster").innerText = entry.cluster;
       document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
