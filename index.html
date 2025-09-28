@@ -605,11 +605,40 @@ let filteredProteins = proteins;
         }
 
         // enable hover tooltips
+        
         const proteinID = entry.id;  // capture ID for hover callbacks
+
         viewer.setHoverable({}, true,
           function(atom, viewer, event, container) {
             if(atom) {
               const tooltip = document.getElementById("tooltip");
+              tooltip.style.display = "block";
+              tooltip.style.left = (event.pageX + 12) + "px";
+              tooltip.style.top  = (event.pageY + 12) + "px";
+              tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
+
+              // add temporary red highlight without clearing base styles
+              viewer.addStyle({resi: atom.resi, chain: atom.chain}, {cartoon:{color:'red'}});
+              viewer.render();
+            }
+          },
+          function(atom, viewer) {
+            const tooltip = document.getElementById("tooltip");
+            tooltip.style.display = "none";
+
+            // On unhover: redraw base coloring (gray), conserved residues (blue), and references (green)
+            viewer.setStyle({}, { cartoon: { color: 'gray' } });
+            if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
+              viewer.addStyle({}, { cartoon: { color: 'green' } });
+            }
+            if(conservedResidues[proteinID]) {
+              const res = conservedResidues[proteinID];
+              viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
+              viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
+            }
+            viewer.render();
+          }
+        );
               tooltip.style.display = "block";
               tooltip.style.left = (event.pageX + 12) + "px";
               tooltip.style.top  = (event.pageY + 12) + "px";
