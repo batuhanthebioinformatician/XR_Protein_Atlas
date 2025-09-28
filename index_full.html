@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>XR Protein Atlas Viewer (3Dmol.js)</title>
-  <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+  <!-- use latest build -->
+  <script src="https://3dmol.org/build/3Dmol-min.js?v=latest"></script>
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background:#0b0e14; color:#e6edf3; }
-    header { padding:10px; background:#121826; display:flex; flex-direction:column; gap:10px; }
-    header h1 { font-size:18px; margin:0; }
-    #controls { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    #clusterButtons { display:flex; flex-wrap:wrap; gap:5px; margin-top:5px; }
-    #viewer { width:100%; height:75vh; position:relative; }
-    #metadata { padding:10px; background:#121826; min-height:15vh; }
-    input, button { padding:6px 10px; border-radius:6px; border:1px solid #2b3648; background:#1f2937; color:#e6edf3; }
-    button:hover { background:#2b3648; cursor:pointer; }
+    body{margin:0;font-family:Arial, sans-serif;background:#0b0e14;color:#e6edf3}
+    header{padding:10px;background:#121826;display:flex;flex-direction:column;gap:10px}
+    header h1{font-size:18px;margin:0}
+    #controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    #clusterButtons{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+    #viewer{width:100%;height:75vh;position:relative}
+    #metadata{padding:10px;background:#121826;min-height:15vh}
+    input,button{padding:6px 10px;border-radius:6px;border:1px solid #2b3648;background:#1f2937;color:#e6edf3}
+    button:hover{background:#2b3648;cursor:pointer}
+    /* floating tooltip */
+    #tooltip{
+      position:fixed; display:none; z-index:9999;
+      background:rgba(0,0,0,.85); color:#fff; padding:4px 6px; border-radius:4px; font-size:12px;
+      pointer-events:none
+    }
   </style>
 </head>
 <body>
@@ -22,23 +29,279 @@
     <div id="controls">
       <button id="prevBtn">◀ Prev</button>
       <button id="nextBtn">Next ▶</button>
-      <input id="searchBox" type="text" placeholder="Search by ID or cluster">
+      <input id="searchBox" type="text" placeholder="Search by ID or cluster" />
       <button id="searchBtn">Search</button>
     </div>
     <div id="clusterButtons"></div>
   </header>
 
   <div id="viewer"></div>
+  <div id="tooltip"></div>
 
   <div id="metadata">
-    <strong>ID:</strong> <span id="meta-id"></span><br>
-    <strong>Cluster:</strong> <span id="meta-cluster"></span><br>
+    <strong>ID:</strong> <span id="meta-id"></span><br/>
+    <strong>Cluster:</strong> <span id="meta-cluster"></span><br/>
     <strong>Type:</strong> <span id="meta-type"></span>
   </div>
 
   <script>
+    /* === Your protein list (kept as you pasted) === */
+    let proteins = [
+      { id: "BDU10525.1", cluster: -1 },
+      { id: "PSQ71425.1", cluster: -1 },
+      { id: "KGA09086.1", cluster: -1 },
+      { id: "RZP28624.1", cluster: -1 },
+      { id: "PQM62056.1", cluster: -1 },
+      { id: "TEX51253.1", cluster: -1 },
+      { id: "BDS50908.1", cluster: -1 },
+      { id: "BDS48601.1", cluster: -1 },
+      { id: "PSQ75764.1", cluster: -1 },
+      { id: "KRO48502.1", cluster: -1 },
+      { id: "GDX15377.1", cluster: -1 },
+      { id: "OZ244400.1", cluster: -1 },
+      { id: "CP175953.1", cluster: -1 },
+      { id: "GIK75739.1", cluster: -1 },
+      { id: "GIJ78539.1", cluster: -1 },
+      { id: "GGL78780.1", cluster: -1 },
+      { id: "GGD58117.1", cluster: -1 },
+      { id: "BDP99755.1", cluster: -1 },
+      { id: "OZ243888.1", cluster: -1 },
+      { id: "VIP02740.1", cluster: -1 },
+      { id: "OY829846.1", cluster: -1 },
+      { id: "PTM12582.1", cluster: -1 },
+      { id: "PDH56100.1", cluster: -1 },
+      { id: "RPF79760.1", cluster: -1 },
+      { id: "RCL66720.1", cluster: -1 },
+      { id: "TVR90991.1", cluster: -1 },
+      { id: "GDX68660.1", cluster: -1 },
+      { id: "RLT23870.1", cluster: -1 },
+      { id: "CP030884.1", cluster: -1 },
+      { id: "RMF54189.1", cluster: -1 },
+      { id: "OZ252252.1", cluster: -1 },
+      { id: "PSN19400.1", cluster: -1 },
+      { id: "TVR25957.1", cluster: -1 },
+      { id: "RDI95066.1", cluster: -1 },
+      { id: "GLV48970.1", cluster: -1 },
+      { id: "RLT17137.1", cluster: -1 },
+      { id: "RLS66247.1", cluster: -1 },
+      { id: "PNY79880.1", cluster: -1 },
+      { id: "BDP42045.1", cluster: -1 },
+      { id: "GIR74196.1", cluster: 0 },
+      { id: "CP121331.1", cluster: 0 },
+      { id: "OZ244580.1", cluster: 0 },
+      { id: "GIR98463.1", cluster: 0 },
+      { id: "GDX66558.1", cluster: 0 },
+      { id: "GDX64887.1", cluster: 0 },
+      { id: "GDX48447.1", cluster: 0 },
+      { id: "OZ245751.1", cluster: 0 },
+      { id: "GDX44761.1", cluster: 0 },
+      { id: "OX044355.1", cluster: 0 },
+      { id: "OZ245931.1", cluster: 0 },
+      { id: "OZ245839.1", cluster: 0 },
+      { id: "OZ252014.1", cluster: 0 },
+      { id: "OZ245756.1", cluster: 0 },
+      { id: "OZ243102.1", cluster: 0 },
+      { id: "OZ245746.1", cluster: 0 },
+      { id: "OY829375.1", cluster: 0 },
+      { id: "GIR21845.1", cluster: 0 },
+      { id: "OX044357.1", cluster: 0 },
+      { id: "OZ244159.1", cluster: 0 },
+      { id: "OZ245719.1", cluster: 0 },
+      { id: "GGD16574.1", cluster: 0 },
+      { id: "CP136574.1", cluster: 0 },
+      { id: "OZ245731.1", cluster: 0 },
+      { id: "CP073016.1", cluster: 0 },
+      { id: "GGH88435.1", cluster: 0 },
+      { id: "GGF73035.1", cluster: 0 },
+      { id: "GCD77160.1", cluster: 0 },
+      { id: "BDD16568.1", cluster: 0 },
+      { id: "OX044356.1", cluster: 0 },
+      { id: "GCD80454.1", cluster: 0 },
+      { id: "GGC30146.1", cluster: 0 },
+      { id: "OX044362.1", cluster: 0 },
+      { id: "OZ252262.1", cluster: 0 },
+      { id: "OZ245886.1", cluster: 0 },
+      { id: "OY829281.1", cluster: 0 },
+      { id: "OZ243096.1", cluster: 0 },
+      { id: "GHB23597.1", cluster: 0 },
+      { id: "CP121312.1", cluster: 0 },
+      { id: "GGB53743.1", cluster: 1 },
+      { id: "OYY97977.1", cluster: 1 },
+      { id: "OYY69292.1", cluster: 1 },
+      { id: "PBN43411.1", cluster: 1 },
+      { id: "OHC98024.1", cluster: 1 },
+      { id: "OHD05260.1", cluster: 1 },
+      { id: "EXS71053.1", cluster: 1 },
+      { id: "OYZ61278.1", cluster: 1 },
+      { id: "AOF96519.1", cluster: 1 },
+      { id: "OZA83208.1", cluster: 1 },
+      { id: "RFU11683.1", cluster: 1 },
+      { id: "OAN57215.1", cluster: 1 },
+      { id: "KTF68840.1", cluster: 1 },
+      { id: "PVX30487.1", cluster: 1 },
+      { id: "CP136575.1", cluster: 1 },
+      { id: "KPF93223.1", cluster: 1 },
+      { id: "KKC31033.1", cluster: 1 },
+      { id: "KIN73522.1", cluster: 1 },
+      { id: "GGD04646.1", cluster: 1 },
+      { id: "SN06pond07", cluster: 1 },
+      { id: "PIX67554.1", cluster: 1 },
+      { id: "RRQ51041.1", cluster: 1 },
+      { id: "PZN99150.1", cluster: 1 },
+      { id: "KQM62812.1", cluster: 1 },
+      { id: "OZ252211.1", cluster: 1 },
+      { id: "L1DT4B", cluster: 1 },
+      { id: "L1BD2", cluster: 1 },
+      { id: "VOU06NAS01", cluster: 1 },
+      { id: "PJK06NCP03", cluster: 1 },
+      { id: "VVT24364.1", cluster: 1 },
+      { id: "OYX57372.1", cluster: 1 },
+      { id: "S2H28", cluster: 1 },
+      { id: "9OR8", cluster: 1 },
+      { id: "JWL2", cluster: 1 },
+      { id: "JOBD13", cluster: 1 },
+      { id: "BCA61338.1", cluster: 1 },
+      { id: "GGE22526.1", cluster: 1 },
+      { id: "JPL28", cluster: 1 },
+      { id: "KQN28516.1", cluster: 1 },
+      { id: "RXD06694.1", cluster: 1 },
+      { id: "PZO76000.1", cluster: 1 },
+      { id: "S3H21", cluster: 1 },
+      { id: "GGE78254.1", cluster: 1 },
+      { id: "OYX73886.1", cluster: 1 },
+      { id: "OYW29954.1", cluster: 1 },
+      { id: "PZO09322.1", cluster: 1 },
+      { id: "EDP63929.1", cluster: 1 },
+      { id: "TVS12205.1", cluster: 1 },
+      { id: "TVQ33031.1", cluster: 1 },
+      { id: "26OR1", cluster: 1 },
+      { id: "GGA49527.1", cluster: 1 },
+      { id: "KQN08864.1", cluster: 1 },
+      { id: "JOOD22", cluster: 1 },
+      { id: "BCA60302.1", cluster: 1 },
+      { id: "TJZ84602.1", cluster: 1 },
+      { id: "ODT58092.1", cluster: 1 },
+      { id: "TGN61835.1", cluster: 1 },
+      { id: "M1U20", cluster: 1 },
+      { id: "J1U1", cluster: 1 },
+      { id: "SKI02AP11", cluster: 1 },
+      { id: "MTK02EP03", cluster: 1 },
+      { id: "QBM75193.1", cluster: 1 },
+      { id: "GHH23836.1", cluster: 1 },
+      { id: "SKI02CP10", cluster: 1 },
+      { id: "SKI02AS03", cluster: 1 },
+      { id: "TPG52660.1", cluster: 1 },
+      { id: "LKI02BS01", cluster: 1 },
+      { id: "TPG09633.1", cluster: 1 },
+      { id: "OYX52601.1", cluster: 1 },
+      { id: "RYD68531.1", cluster: 1 },
+      { id: "AHE52940.1", cluster: 1 },
+      { id: "SSN206AS01", cluster: 1 },
+      { id: "L1BT3", cluster: 1 },
+      { id: "POU06NBS01", cluster: 1 },
+      { id: "POU06NCP01", cluster: 1 },
+      { id: "L1CD2B", cluster: 1 },
+      { id: "KQM73760.1", cluster: 1 },
+      { id: "PND56870.1", cluster: 2 },
+      { id: "KQP67191.1", cluster: 2 },
+      { id: "KAA0928310.1", cluster: 2 },
+      { id: "BBX67830.1", cluster: 2 },
+      { id: "GGF14204.1", cluster: 2 },
+      { id: "OJY43810.1", cluster: 2 },
+      { id: "KQQ42193.1", cluster: 2 },
+      { id: "TVS86872.1", cluster: 2 },
+      { id: "BDX33020.1", cluster: 2 },
+      { id: "GLP76198.1", cluster: 2 },
+      { id: "TPG37408.1", cluster: 2 },
+      { id: "OFE15031.1", cluster: 2 },
+      { id: "GDX33038.1", cluster: 2 },
+      { id: "GDX17393.1", cluster: 2 },
+      { id: "KQY09766.1", cluster: 2 },
+      { id: "PVE17425.1", cluster: 2 },
+      { id: "PHX60469.1", cluster: 2 },
+      { id: "PPB45911.1", cluster: 2 },
+      { id: "GGF92574.1", cluster: 2 },
+      { id: "POH71228.1", cluster: 2 },
+      { id: "POH64568.1", cluster: 2 },
+      { id: "ASD22500.1", cluster: 2 },
+      { id: "TPV25452.1", cluster: 2 },
+      { id: "TFD93427.1", cluster: 2 },
+      { id: "PXA72408.1", cluster: 2 },
+      { id: "ANP74617.1", cluster: 2 },
+      { id: "TFC17038.1", cluster: 2 },
+      { id: "TFB96360.1", cluster: 2 },
+      { id: "TFB90653.1", cluster: 2 },
+      { id: "OZE29894.1", cluster: 2 },
+      { id: "RFA24929.1", cluster: 2 },
+      { id: "RFA18018.1", cluster: 2 },
+      { id: "RFA12328.1", cluster: 2 },
+      { id: "PPF85931.1", cluster: 2 },
+      { id: "AWG02835.1", cluster: 2 },
+      { id: "AJW80239.1", cluster: 2 },
+      { id: "TFC16264.1", cluster: 2 },
+      { id: "QHO71000.1", cluster: 2 },
+      { id: "AZI59391.1", cluster: 2 },
+      { id: "TIH31229.1", cluster: 2 },
+      { id: "GGL05201.1", cluster: 2 },
+      { id: "KAA9111499.1", cluster: 2 },
+      { id: "RFA18400.1", cluster: 2 },
+      { id: "OZE95541.1", cluster: 2 },
+      { id: "TFB99530.1", cluster: 2 },
+      { id: "TFC80037.1", cluster: 2 },
+      { id: "TFC85940.1", cluster: 2 },
+      { id: "TFC91058.1", cluster: 2 },
+      { id: "TFC31694.1", cluster: 2 },
+      { id: "TFB54523.1", cluster: 2 },
+      { id: "OUM42966.1", cluster: 2 },
+      { id: "TFC80606.1", cluster: 2 },
+      { id: "TFD76797.1", cluster: 2 },
+      { id: "TFD76712.1", cluster: 2 },
+      { id: "TFD28381.1", cluster: 2 },
+      { id: "TFB81715.1", cluster: 2 },
+      { id: "TFD08492.1", cluster: 2 },
+      { id: "TFD24290.1", cluster: 2 },
+      { id: "TFC25459.1", cluster: 2 },
+      { id: "PPB48466.1", cluster: 2 },
+      { id: "TFD85230.1", cluster: 2 },
+      { id: "RJT90601.1", cluster: 2 },
+      { id: "TFB89747.1", cluster: 2 },
+      { id: "KRO49903.1", cluster: 3 },
+      { id: "KRO51529.1", cluster: 3 },
+      { id: "TSA20550.1", cluster: 3 },
+      { id: "GDX21556.1", cluster: 3 },
+      { id: "TRZ73044.1", cluster: 3 },
+      { id: "QLL25445.1", cluster: 3 },
+      { id: "QLL24047.1", cluster: 3 },
+      { id: "KRO36646.1", cluster: 3 },
+      { id: "KRO30341.1", cluster: 3 },
+      { id: "GDX24649.1", cluster: 3 },
+      { id: "GDX22696.1", cluster: 3 },
+      { id: "GDX16682.1", cluster: 3 },
+      { id: "PHX75877.1", cluster: 3 },
+      { id: "RMH64933.1", cluster: 4 },
+      { id: "PSQ94854.1", cluster: 4 },
+      { id: "PQJ33473.1", cluster: 4 },
+      { id: "PSQ94898.1", cluster: 4 },
+      { id: "PSQ65031.1", cluster: 4 },
+      { id: "PSQ66410.1", cluster: 4 },
+      { id: "PEN15075.1", cluster: 4 },
+      { id: "PSQ95756.1", cluster: 4 },
+      { id: "PJF31817.1", cluster: 4 },
+      { id: "RZM77228.1", cluster: 5 },
+      { id: "TVP63961.1", cluster: 5 },
+      { id: "ESA36503.1", cluster: 5 },
+      { id: "GGJ70114.1", cluster: 5 },
+      { id: "GGR19346.1", cluster: 5 },
+      { id: "OZ252009.1", cluster: 5 },
+      { id: "ANE44876.1", cluster: 5 },
+      { id: "PJF35373.1", cluster: 5 },
+      { id: "OZ252036.1", cluster: 5 },
+      // Experimental CIF
+      { id: "Kin4B8", cluster: 1, format: "cif", experimental: true },
+      { id: "ABC44767.1", cluster: 4, format: "cif", experimental: true }
+    ];
 
-let conservedResidues = {
+    let conservedResidues = {
   "ABC44767.1": { gly: 156, lys: 240 },
   "OZ243888.1": { gly: 152, lys: 236 },
   "GDX15377.1": { gly: 144, lys: 232 },
@@ -291,277 +554,26 @@ let conservedResidues = {
   "TVP63961.1": { gly: 158, lys: 237 },
   "ESA36503.1": { gly: 158, lys: 237 },
 };
-
-
-    let proteins = [
-  { id: "BDU10525.1", cluster: -1 },
-  { id: "PSQ71425.1", cluster: -1 },
-  { id: "KGA09086.1", cluster: -1 },
-  { id: "RZP28624.1", cluster: -1 },
-  { id: "PQM62056.1", cluster: -1 },
-  { id: "TEX51253.1", cluster: -1 },
-  { id: "BDS50908.1", cluster: -1 },
-  { id: "BDS48601.1", cluster: -1 },
-  { id: "PSQ75764.1", cluster: -1 },
-  { id: "KRO48502.1", cluster: -1 },
-  { id: "GDX15377.1", cluster: -1 },
-  { id: "OZ244400.1", cluster: -1 },
-  { id: "CP175953.1", cluster: -1 },
-  { id: "GIK75739.1", cluster: -1 },
-  { id: "GIJ78539.1", cluster: -1 },
-  { id: "GGL78780.1", cluster: -1 },
-  { id: "GGD58117.1", cluster: -1 },
-  { id: "BDP99755.1", cluster: -1 },
-  { id: "OZ243888.1", cluster: -1 },
-  { id: "VIP02740.1", cluster: -1 },
-  { id: "OY829846.1", cluster: -1 },
-  { id: "PTM12582.1", cluster: -1 },
-  { id: "PDH56100.1", cluster: -1 },
-  { id: "RPF79760.1", cluster: -1 },
-  { id: "RCL66720.1", cluster: -1 },
-  { id: "TVR90991.1", cluster: -1 },
-  { id: "GDX68660.1", cluster: -1 },
-  { id: "RLT23870.1", cluster: -1 },
-  { id: "CP030884.1", cluster: -1 },
-  { id: "RMF54189.1", cluster: -1 },
-  { id: "OZ252252.1", cluster: -1 },
-  { id: "PSN19400.1", cluster: -1 },
-  { id: "TVR25957.1", cluster: -1 },
-  { id: "RDI95066.1", cluster: -1 },
-  { id: "GLV48970.1", cluster: -1 },
-  { id: "RLT17137.1", cluster: -1 },
-  { id: "RLS66247.1", cluster: -1 },
-  { id: "PNY79880.1", cluster: -1 },
-  { id: "BDP42045.1", cluster: -1 },
-  { id: "GIR74196.1", cluster: 0 },
-  { id: "CP121331.1", cluster: 0 },
-  { id: "OZ244580.1", cluster: 0 },
-  { id: "GIR98463.1", cluster: 0 },
-  { id: "GDX66558.1", cluster: 0 },
-  { id: "GDX64887.1", cluster: 0 },
-  { id: "GDX48447.1", cluster: 0 },
-  { id: "OZ245751.1", cluster: 0 },
-  { id: "GDX44761.1", cluster: 0 },
-  { id: "OX044355.1", cluster: 0 },
-  { id: "OZ245931.1", cluster: 0 },
-  { id: "OZ245839.1", cluster: 0 },
-  { id: "OZ252014.1", cluster: 0 },
-  { id: "OZ245756.1", cluster: 0 },
-  { id: "OZ243102.1", cluster: 0 },
-  { id: "OZ245746.1", cluster: 0 },
-  { id: "OY829375.1", cluster: 0 },
-  { id: "GIR21845.1", cluster: 0 },
-  { id: "OX044357.1", cluster: 0 },
-  { id: "OZ244159.1", cluster: 0 },
-  { id: "OZ245719.1", cluster: 0 },
-  { id: "GGD16574.1", cluster: 0 },
-  { id: "CP136574.1", cluster: 0 },
-  { id: "OZ245731.1", cluster: 0 },
-  { id: "CP073016.1", cluster: 0 },
-  { id: "GGH88435.1", cluster: 0 },
-  { id: "GGF73035.1", cluster: 0 },
-  { id: "GCD77160.1", cluster: 0 },
-  { id: "BDD16568.1", cluster: 0 },
-  { id: "OX044356.1", cluster: 0 },
-  { id: "GCD80454.1", cluster: 0 },
-  { id: "GGC30146.1", cluster: 0 },
-  { id: "OX044362.1", cluster: 0 },
-  { id: "OZ252262.1", cluster: 0 },
-  { id: "OZ245886.1", cluster: 0 },
-  { id: "OY829281.1", cluster: 0 },
-  { id: "OZ243096.1", cluster: 0 },
-  { id: "GHB23597.1", cluster: 0 },
-  { id: "CP121312.1", cluster: 0 },
-  { id: "GGB53743.1", cluster: 1 },
-  { id: "OYY97977.1", cluster: 1 },
-  { id: "OYY69292.1", cluster: 1 },
-  { id: "PBN43411.1", cluster: 1 },
-  { id: "OHC98024.1", cluster: 1 },
-  { id: "OHD05260.1", cluster: 1 },
-  { id: "EXS71053.1", cluster: 1 },
-  { id: "OYZ61278.1", cluster: 1 },
-  { id: "AOF96519.1", cluster: 1 },
-  { id: "OZA83208.1", cluster: 1 },
-  { id: "RFU11683.1", cluster: 1 },
-  { id: "OAN57215.1", cluster: 1 },
-  { id: "KTF68840.1", cluster: 1 },
-  { id: "PVX30487.1", cluster: 1 },
-  { id: "CP136575.1", cluster: 1 },
-  { id: "KPF93223.1", cluster: 1 },
-  { id: "KKC31033.1", cluster: 1 },
-  { id: "KIN73522.1", cluster: 1 },
-  { id: "GGD04646.1", cluster: 1 },
-  { id: "SN06pond07", cluster: 1 },
-  { id: "PIX67554.1", cluster: 1 },
-  { id: "RRQ51041.1", cluster: 1 },
-  { id: "PZN99150.1", cluster: 1 },
-  { id: "KQM62812.1", cluster: 1 },
-  { id: "OZ252211.1", cluster: 1 },
-  { id: "L1DT4B", cluster: 1 },
-  { id: "L1BD2", cluster: 1 },
-  { id: "VOU06NAS01", cluster: 1 },
-  { id: "PJK06NCP03", cluster: 1 },
-  { id: "VVT24364.1", cluster: 1 },
-  { id: "OYX57372.1", cluster: 1 },
-  { id: "S2H28", cluster: 1 },
-  { id: "9OR8", cluster: 1 },
-  { id: "JWL2", cluster: 1 },
-  { id: "JOBD13", cluster: 1 },
-  { id: "BCA61338.1", cluster: 1 },
-  { id: "GGE22526.1", cluster: 1 },
-  { id: "JPL28", cluster: 1 },
-  { id: "KQN28516.1", cluster: 1 },
-  { id: "RXD06694.1", cluster: 1 },
-  { id: "PZO76000.1", cluster: 1 },
-  { id: "S3H21", cluster: 1 },
-  { id: "GGE78254.1", cluster: 1 },
-  { id: "OYX73886.1", cluster: 1 },
-  { id: "OYW29954.1", cluster: 1 },
-  { id: "PZO09322.1", cluster: 1 },
-  { id: "EDP63929.1", cluster: 1 },
-  { id: "TVS12205.1", cluster: 1 },
-  { id: "TVQ33031.1", cluster: 1 },
-  { id: "26OR1", cluster: 1 },
-  { id: "GGA49527.1", cluster: 1 },
-  { id: "KQN08864.1", cluster: 1 },
-  { id: "JOOD22", cluster: 1 },
-  { id: "BCA60302.1", cluster: 1 },
-  { id: "TJZ84602.1", cluster: 1 },
-  { id: "ODT58092.1", cluster: 1 },
-  { id: "TGN61835.1", cluster: 1 },
-  { id: "M1U20", cluster: 1 },
-  { id: "J1U1", cluster: 1 },
-  { id: "SKI02AP11", cluster: 1 },
-  { id: "MTK02EP03", cluster: 1 },
-  { id: "QBM75193.1", cluster: 1 },
-  { id: "GHH23836.1", cluster: 1 },
-  { id: "SKI02CP10", cluster: 1 },
-  { id: "SKI02AS03", cluster: 1 },
-  { id: "TPG52660.1", cluster: 1 },
-  { id: "LKI02BS01", cluster: 1 },
-  { id: "TPG09633.1", cluster: 1 },
-  { id: "OYX52601.1", cluster: 1 },
-  { id: "RYD68531.1", cluster: 1 },
-  { id: "AHE52940.1", cluster: 1 },
-  { id: "SSN206AS01", cluster: 1 },
-  { id: "L1BT3", cluster: 1 },
-  { id: "POU06NBS01", cluster: 1 },
-  { id: "POU06NCP01", cluster: 1 },
-  { id: "L1CD2B", cluster: 1 },
-  { id: "KQM73760.1", cluster: 1 },
-  { id: "PND56870.1", cluster: 2 },
-  { id: "KQP67191.1", cluster: 2 },
-  { id: "KAA0928310.1", cluster: 2 },
-  { id: "BBX67830.1", cluster: 2 },
-  { id: "GGF14204.1", cluster: 2 },
-  { id: "OJY43810.1", cluster: 2 },
-  { id: "KQQ42193.1", cluster: 2 },
-  { id: "TVS86872.1", cluster: 2 },
-  { id: "BDX33020.1", cluster: 2 },
-  { id: "GLP76198.1", cluster: 2 },
-  { id: "TPG37408.1", cluster: 2 },
-  { id: "OFE15031.1", cluster: 2 },
-  { id: "GDX33038.1", cluster: 2 },
-  { id: "GDX17393.1", cluster: 2 },
-  { id: "KQY09766.1", cluster: 2 },
-  { id: "PVE17425.1", cluster: 2 },
-  { id: "PHX60469.1", cluster: 2 },
-  { id: "PPB45911.1", cluster: 2 },
-  { id: "GGF92574.1", cluster: 2 },
-  { id: "POH71228.1", cluster: 2 },
-  { id: "POH64568.1", cluster: 2 },
-  { id: "ASD22500.1", cluster: 2 },
-  { id: "TPV25452.1", cluster: 2 },
-  { id: "TFD93427.1", cluster: 2 },
-  { id: "PXA72408.1", cluster: 2 },
-  { id: "ANP74617.1", cluster: 2 },
-  { id: "TFC17038.1", cluster: 2 },
-  { id: "TFB96360.1", cluster: 2 },
-  { id: "TFB90653.1", cluster: 2 },
-  { id: "OZE29894.1", cluster: 2 },
-  { id: "RFA24929.1", cluster: 2 },
-  { id: "RFA18018.1", cluster: 2 },
-  { id: "RFA12328.1", cluster: 2 },
-  { id: "PPF85931.1", cluster: 2 },
-  { id: "AWG02835.1", cluster: 2 },
-  { id: "AJW80239.1", cluster: 2 },
-  { id: "TFC16264.1", cluster: 2 },
-  { id: "QHO71000.1", cluster: 2 },
-  { id: "AZI59391.1", cluster: 2 },
-  { id: "TIH31229.1", cluster: 2 },
-  { id: "GGL05201.1", cluster: 2 },
-  { id: "KAA9111499.1", cluster: 2 },
-  { id: "RFA18400.1", cluster: 2 },
-  { id: "OZE95541.1", cluster: 2 },
-  { id: "TFB99530.1", cluster: 2 },
-  { id: "TFC80037.1", cluster: 2 },
-  { id: "TFC85940.1", cluster: 2 },
-  { id: "TFC91058.1", cluster: 2 },
-  { id: "TFC31694.1", cluster: 2 },
-  { id: "TFB54523.1", cluster: 2 },
-  { id: "OUM42966.1", cluster: 2 },
-  { id: "TFC80606.1", cluster: 2 },
-  { id: "TFD76797.1", cluster: 2 },
-  { id: "TFD76712.1", cluster: 2 },
-  { id: "TFD28381.1", cluster: 2 },
-  { id: "TFB81715.1", cluster: 2 },
-  { id: "TFD08492.1", cluster: 2 },
-  { id: "TFD24290.1", cluster: 2 },
-  { id: "TFC25459.1", cluster: 2 },
-  { id: "PPB48466.1", cluster: 2 },
-  { id: "TFD85230.1", cluster: 2 },
-  { id: "RJT90601.1", cluster: 2 },
-  { id: "TFB89747.1", cluster: 2 },
-  { id: "KRO49903.1", cluster: 3 },
-  { id: "KRO51529.1", cluster: 3 },
-  { id: "TSA20550.1", cluster: 3 },
-  { id: "GDX21556.1", cluster: 3 },
-  { id: "TRZ73044.1", cluster: 3 },
-  { id: "QLL25445.1", cluster: 3 },
-  { id: "QLL24047.1", cluster: 3 },
-  { id: "KRO36646.1", cluster: 3 },
-  { id: "KRO30341.1", cluster: 3 },
-  { id: "GDX24649.1", cluster: 3 },
-  { id: "GDX22696.1", cluster: 3 },
-  { id: "GDX16682.1", cluster: 3 },
-  { id: "PHX75877.1", cluster: 3 },
-  { id: "RMH64933.1", cluster: 4 },
-  { id: "PSQ94854.1", cluster: 4 },
-  { id: "PQJ33473.1", cluster: 4 },
-  { id: "PSQ94898.1", cluster: 4 },
-  { id: "PSQ65031.1", cluster: 4 },
-  { id: "PSQ66410.1", cluster: 4 },
-  { id: "PEN15075.1", cluster: 4 },
-  { id: "PSQ95756.1", cluster: 4 },
-  { id: "PJF31817.1", cluster: 4 },
-  { id: "RZM77228.1", cluster: 5 },
-  { id: "TVP63961.1", cluster: 5 },
-  { id: "ESA36503.1", cluster: 5 },
-  { id: "GGJ70114.1", cluster: 5 },
-  { id: "GGR19346.1", cluster: 5 },
-  { id: "OZ252009.1", cluster: 5 },
-  { id: "ANE44876.1", cluster: 5 },
-  { id: "PJF35373.1", cluster: 5 },
-  { id: "OZ252036.1", cluster: 5 },
-
-
-      // Experimental CIF structures
-      { id: "Kin4B8", cluster: 1, format: "cif", experimental: true },
-      { id: "ABC44767.1", cluster: 4, format: "cif", experimental: true }
-
-      
-    ];
-
-    let filteredProteins = proteins;
+let filteredProteins = proteins;
     let currentIndex = 0;
     let viewer;
+    const tooltip = document.getElementById('tooltip');
+
+    // base style shown at all times
+    const baseStyle = { cartoon: { color: 'gray' } };
+    // highlight style for hovered residue
+    const highlightStyle = { stick: { color: 'red', radius: 0.45 } };
+
+    function getPageXY(evt){
+      const x = (evt && (evt.pageX || (evt.clientX + window.scrollX))) || 0;
+      const y = (evt && (evt.pageY || (evt.clientY + window.scrollY))) || 0;
+      return [x,y];
+    }
 
     function init() {
       viewer = $3Dmol.createViewer("viewer", { backgroundColor: "white" });
       createClusterButtons();
-      if (proteins.length > 0) {
-        loadProtein(0);
-      }
+      if (proteins.length) loadProtein(0);
     }
 
     function loadProtein(index) {
@@ -569,17 +581,59 @@ let conservedResidues = {
       const entry = filteredProteins[index];
       if (!entry) return;
 
-      // Decide extension
       const ext = entry.format === "cif" ? "cif" : "pdb";
       const filePath = `models/${entry.id}.${ext}`;
 
       viewer.clear();
+      tooltip.style.display = 'none';
+
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
-        viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
+
+        // default gray
+        viewer.setStyle({}, baseStyle);
+
+        // special references green
+        if(entry.id === "ABC44767.1" || entry.id === "Kin4B8") {
+          viewer.setStyle({}, { cartoon: { color: 'green' } });
+        }
+
+        // conserved residues blue
+        if(conservedResidues[entry.id]) {
+          const res = conservedResidues[entry.id];
+          viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
+          viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
+        }
+
+
+        // enable atom picking over the whole model (works even with only cartoon drawn)
+        viewer.setHoverable({}, true,
+          // hover in
+          function(atom, v, event, container) {
+            if (!atom) return;
+            const [px, py] = getPageXY(event);
+            tooltip.style.display = 'block';
+            tooltip.style.left = (px + 12) + 'px';
+            tooltip.style.top  = (py + 12) + 'px';
+            tooltip.innerHTML  = `${atom.resn} ${atom.resi} (Chain ${atom.chain}) — ${atom.atom}`;
+
+            // redraw: base + highlight current residue
+            v.setStyle({}, baseStyle);
+            v.addStyle({resi: atom.resi, chain: atom.chain}, highlightStyle);
+            v.render();
+          },
+          // hover out
+          function(atom, v) {
+            tooltip.style.display = 'none';
+            v.setStyle({}, baseStyle);
+            v.render();
+          }
+        );
+
         viewer.zoomTo();
         viewer.render();
       });
 
+      // update meta
       document.getElementById("meta-id").innerText = entry.id;
       document.getElementById("meta-cluster").innerText = entry.cluster;
       document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
@@ -588,52 +642,38 @@ let conservedResidues = {
     function createClusterButtons() {
       const container = document.getElementById("clusterButtons");
       container.innerHTML = "";
-      const clusters = [...new Set(proteins.map(p => p.cluster))];
-      clusters.sort((a, b) => a - b);
+      const clusters = [...new Set(proteins.map(p => p.cluster))].sort((a,b)=>a-b);
 
       clusters.forEach(cluster => {
         const btn = document.createElement("button");
         btn.textContent = cluster;
-        btn.onclick = () => {
-          filteredProteins = proteins.filter(p => p.cluster === cluster);
-          loadProtein(0);
-        };
+        btn.onclick = () => { filteredProteins = proteins.filter(p => p.cluster === cluster); loadProtein(0); };
         container.appendChild(btn);
       });
 
       const allBtn = document.createElement("button");
       allBtn.textContent = "All";
-      allBtn.onclick = () => {
-        filteredProteins = proteins;
-        loadProtein(0);
-      };
+      allBtn.onclick = () => { filteredProteins = proteins; loadProtein(0); };
       container.insertBefore(allBtn, container.firstChild);
     }
 
     document.getElementById("prevBtn").onclick = () => {
-      if (filteredProteins.length === 0) return;
+      if (!filteredProteins.length) return;
       const newIndex = (currentIndex - 1 + filteredProteins.length) % filteredProteins.length;
       loadProtein(newIndex);
     };
 
     document.getElementById("nextBtn").onclick = () => {
-      if (filteredProteins.length === 0) return;
+      if (!filteredProteins.length) return;
       const newIndex = (currentIndex + 1) % filteredProteins.length;
       loadProtein(newIndex);
     };
 
     document.getElementById("searchBtn").onclick = () => {
-      const query = document.getElementById("searchBox").value.toLowerCase();
-      const idx = proteins.findIndex(p =>
-        p.id.toLowerCase().includes(query) ||
-        String(p.cluster).toLowerCase().includes(query)
-      );
-      if (idx !== -1) {
-        filteredProteins = proteins;
-        loadProtein(idx);
-      } else {
-        alert("No match found");
-      }
+      const q = document.getElementById("searchBox").value.toLowerCase();
+      const idx = proteins.findIndex(p => p.id.toLowerCase().includes(q) || String(p.cluster).toLowerCase().includes(q));
+      if (idx !== -1) { filteredProteins = proteins; loadProtein(idx); }
+      else alert("No match found");
     };
 
     window.onload = init;
