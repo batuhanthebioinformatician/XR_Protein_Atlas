@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>XR Protein Atlas Viewer (3Dmol.js)</title>
+  <!-- 3Dmol.js -->
   <script src="https://3dmol.org/build/3Dmol-min.js?v=latest"></script>
   <style>
     body{margin:0;font-family:Arial, sans-serif;background:#0b0e14;color:#e6edf3}
@@ -43,9 +44,9 @@
   </div>
 
   <script>
-    /* === Proteins list (full) === */
+    /* ===== Protein list (truncated for example, keep your full one) ===== */
     let proteins = [
-     { id: "BDU10525.1", cluster: -1 },
+       { id: "BDU10525.1", cluster: -1 },
       { id: "PSQ71425.1", cluster: -1 },
       { id: "KGA09086.1", cluster: -1 },
       { id: "RZP28624.1", cluster: -1 },
@@ -552,6 +553,7 @@
   "TVP63961.1": { gly: 158, lys: 237 },
   "ESA36503.1": { gly: 158, lys: 237 },
 };
+
     let filteredProteins = proteins;
     let currentIndex = 0;
     let viewer;
@@ -575,56 +577,43 @@
       tooltip.style.display = 'none';
 
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
-        // base gray
+        const proteinID = entry.id;
+
+        // Default: gray
         viewer.setStyle({}, { cartoon: { color: 'gray' } });
 
-        // special references green
-        if(entry.id === "ABC44767.1" || entry.id === "Kin4B8") {
+        // Special references: green
+        if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
           viewer.setStyle({}, { cartoon: { color: 'green' } });
         }
 
-        // conserved residues blue
-        if(conservedResidues[entry.id]) {
-          const res = conservedResidues[entry.id];
+        // Conserved residues: blue
+        if(conservedResidues[proteinID]) {
+          const res = conservedResidues[proteinID];
           viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
           viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
         }
 
-        // enable hover tooltips
-        const proteinID = entry.id;
-       viewer.setHoverable({}, true,
-  function(atom, viewer, event, container) {
-    if(atom) {
-      tooltip.style.display = "block";
-      tooltip.style.left = (event.pageX + 12) + "px";
-      tooltip.style.top  = (event.pageY + 12) + "px";
-      tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
+        // Hoverable residues
+        viewer.setHoverable({}, true,
+          // Hover in
+          function(atom, viewer, event, container) {
+            if(atom) {
+              tooltip.style.display = "block";
+              tooltip.style.left = (event.pageX + 12) + "px";
+              tooltip.style.top  = (event.pageY + 12) + "px";
+              tooltip.innerHTML = atom.resn + " " + atom.resi + " (Chain " + atom.chain + ") — " + atom.atom;
 
-      // add temporary red stick highlight
-      viewer.addStyle({resi: atom.resi, chain: atom.chain}, {stick:{color:'red', radius:0.4}});
-      viewer.render();
-    }
-  },
-  function(atom, viewer) {
-    tooltip.style.display = "none";
-
-    // redraw baseline styles
-    viewer.setStyle({}, { cartoon: { color: 'gray' } });
-    if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
-      viewer.addStyle({}, { cartoon: { color: 'green' } });
-    }
-    if(conservedResidues[proteinID]) {
-      const res = conservedResidues[proteinID];
-      viewer.addStyle({resi: res.gly}, {cartoon:{color:'blue'}});
-      viewer.addStyle({resi: res.lys}, {cartoon:{color:'blue'}});
-    }
-    viewer.render();
-  }
-);
-
+              // Temporary stick highlight
+              viewer.addStyle({resi: atom.resi, chain: atom.chain}, {stick:{color:'red', radius:0.4}});
+              viewer.render();
+            }
+          },
+          // Hover out
           function(atom, viewer) {
             tooltip.style.display = "none";
-            // redraw baseline styles
+
+            // Reset baseline styles
             viewer.setStyle({}, { cartoon: { color: 'gray' } });
             if(proteinID === "ABC44767.1" || proteinID === "Kin4B8") {
               viewer.addStyle({}, { cartoon: { color: 'green' } });
@@ -642,6 +631,7 @@
         viewer.render();
       });
 
+      // Metadata
       document.getElementById("meta-id").innerText = entry.id;
       document.getElementById("meta-cluster").innerText = entry.cluster;
       document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
@@ -651,32 +641,31 @@
       const container = document.getElementById("clusterButtons");
       container.innerHTML = "";
       const clusters = [...new Set(proteins.map(p => p.cluster))].sort((a,b)=>a-b);
-
       clusters.forEach(cluster => {
         const btn = document.createElement("button");
         btn.textContent = cluster;
         btn.onclick = () => { filteredProteins = proteins.filter(p => p.cluster === cluster); loadProtein(0); };
         container.appendChild(btn);
       });
-
       const allBtn = document.createElement("button");
       allBtn.textContent = "All";
       allBtn.onclick = () => { filteredProteins = proteins; loadProtein(0); };
       container.insertBefore(allBtn, container.firstChild);
     }
 
+    // Navigation
     document.getElementById("prevBtn").onclick = () => {
       if (!filteredProteins.length) return;
       const newIndex = (currentIndex - 1 + filteredProteins.length) % filteredProteins.length;
       loadProtein(newIndex);
     };
-
     document.getElementById("nextBtn").onclick = () => {
       if (!filteredProteins.length) return;
       const newIndex = (currentIndex + 1) % filteredProteins.length;
       loadProtein(newIndex);
     };
 
+    // Search
     document.getElementById("searchBtn").onclick = () => {
       const q = document.getElementById("searchBox").value.toLowerCase();
       const idx = proteins.findIndex(p => p.id.toLowerCase().includes(q) || String(p.cluster).toLowerCase().includes(q));
