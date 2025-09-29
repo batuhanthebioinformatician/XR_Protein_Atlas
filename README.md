@@ -1,7 +1,7 @@
 # XR Protein Atlas Viewer
 
 An interactive web-based atlas for exploring **Xanthorhodopsin (XR) protein structures**.  
-This tool allows researchers and students to visualize ~250 modeled XR proteins, grouped into **HDBSCAN clusters** derived from polymorphism and sequence similarity analysis.
+This tool allows researchers and students to visualize 251 modeled XR proteins, grouped into **HDBSCAN clusters** derived from polymorphism and sequence similarity analysis.
 
 ## Features
 - **3D interactive visualization** using [3Dmol.js](https://3dmol.org).
