@@ -381,7 +381,19 @@ let proteinMetadata = {"GIR74196.1": {"IG/MAG": "MAG", "Location": "AS:Japan:180
       });
 
       // Metadata
-      document.getElementById("meta-id").innerText = entry.id;
+      
+      // Build metadata panel dynamically
+      const metaDiv = document.getElementById("metadata");
+      let metaHTML = "<strong>ID:</strong> " + entry.id + "<br/>" +
+                     "<strong>Cluster:</strong> " + entry.cluster + "<br/>" +
+                     "<strong>Type:</strong> " + (entry.experimental ? "Experimental" : "Predicted") + "<br/>";
+      if (proteinMetadata[entry.id]) {
+        for (const [key, value] of Object.entries(proteinMetadata[entry.id])) {
+          metaHTML += "<strong>" + key + ":</strong> " + value + "<br/>";
+        }
+      }
+      metaDiv.innerHTML = metaHTML;
+
       document.getElementById("meta-cluster").innerText = entry.cluster;
       document.getElementById("meta-type").innerText = entry.experimental ? "Experimental" : "Predicted";
     }
