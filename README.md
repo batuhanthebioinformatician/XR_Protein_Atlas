@@ -17,8 +17,8 @@ This tool allows researchers and students to visualize 251 modeled XR proteins, 
 
 ## Deployment
 This project is deployed on **GitHub Pages**:  
-XR Protein Atlas (HDBSCAN clusters): https://batuhanthebioinformatician.github.io/XR_Protein_Atlas/index.html
-XR Protein Atlas (TM topology clusters): https://batuhanthebioinformatician.github.io/XR_Protein_Atlas/index_tm_clusters.html
+XR Protein Atlas (HDBSCAN clusters): https://batuhanthemicrobiologist.github.io/XR_Protein_Atlas/index.html
+XR Protein Atlas (TM topology clusters): https://batuhanthemicrobiologist.github.io/XR_Protein_Atlas/index_tm_clusters.html
 
 ## Local Usage
 To run locally:
