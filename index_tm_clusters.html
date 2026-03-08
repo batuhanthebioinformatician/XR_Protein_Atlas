@@ -73,12 +73,13 @@
     }
 
     function applyBaseStyles(proteinID) {
-      viewer.setStyle({polymer:true}, {cartoon:{color: proteinID === "3DDL" || proteinID === "8I2Z" ? "#9ad39a" : "#bfbfbf"}});
-      viewer.addStyle({hetflag:true}, {stick:{radius:0.18}});
+      viewer.setStyle({}, {});
+      viewer.setStyle({}, {cartoon:{color: proteinID === "3DDL" || proteinID === "8I2Z" ? "#9ad39a" : "#bfbfbf"}});
+      if (proteinID === "3DDL" || proteinID === "8I2Z") viewer.addStyle({hetflag:true}, {stick:{radius:0.18}});
       const residues = conservedResidues[proteinID] || {};
       for (const [resiStr, color] of Object.entries(residues)) {
         const resi = parseInt(resiStr, 10);
-        viewer.addStyle({resi:resi, polymer:true}, {stick:{color:color, radius:0.28}, cartoon:{color:color}});
+        viewer.addStyle({resi:resi}, {stick:{color:color, radius:0.28}, cartoon:{color:color}});
       }
     }
 
@@ -100,14 +101,14 @@
         viewer.addModel(data, "cif");
         applyBaseStyles(proteinID);
 
-        viewer.setHoverable({polymer:true}, true,
+        viewer.setHoverable({}, true,
           function(atom, viewer, event) {
             if (!atom) return;
             tooltip.style.display = "block";
             tooltip.style.left = (event.pageX + 12) + "px";
             tooltip.style.top = (event.pageY + 12) + "px";
             tooltip.innerHTML = `${atom.resn || ""} ${atom.resi} (Chain ${atom.chain || ""}) — ${atom.atom || ""}`;
-            viewer.addStyle({resi: atom.resi, chain: atom.chain, polymer:true}, {stick:{color:"red", radius:0.32}});
+            viewer.addStyle({resi: atom.resi, chain: atom.chain}, {stick:{color:"red", radius:0.32}});
             viewer.render();
           },
           function(atom, viewer) {
@@ -118,7 +119,7 @@
           }
         );
 
-        viewer.zoomTo({polymer:true});
+        viewer.zoomTo();
         viewer.render();
       } catch (err) {
         showError(err.message);
