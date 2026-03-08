@@ -1,0 +1,4 @@
+*.cif binary
+*.pdb binary
+*.html text eol=lf
+*.json text eol=lf
