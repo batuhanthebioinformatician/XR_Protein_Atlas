@@ -27,7 +27,7 @@
     <div id="controls">
       <button id="prevBtn">◀ Prev</button>
       <button id="nextBtn">Next ▶</button>
-      <input id="searchBox" type="text" placeholder="Search by ID, HDBSCAN cluster, or structure class" />
+      <input id="searchBox" type="text" placeholder="Search by ID, HDBSCAN cluster, or TM cluster" />
       <button id="searchBtn">Search</button>
     </div>
     <div id="tmButtons"></div>
@@ -40,9 +40,9 @@
 
   <script>
     // Data injected from spreadsheets
-    let proteins = [{"id":"3DDL","cluster":4,"format":"cif","experimental":true,"type":"Experimental","tm_cluster":"SC4"},{"id":"BDP42045.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"BDP99755.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"BDS48601.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"BDS50908.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"BDU10525.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"CP030884.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"CP175953.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GDX15377.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GDX68660.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GGD58117.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GGL78780.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GIJ78539.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GIK75739.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GLV48970.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KGA09086.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"KRO48502.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"8I2Z","cluster":-1,"format":"cif","experimental":true,"type":"Experimental","tm_cluster":"SC4"},{"id":"OY829846.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"OZ243888.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"OZ244400.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"OZ252252.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PDH56100.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PNY79880.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PQM62056.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"PSN19400.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"PSQ71425.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"PSQ75764.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"PTM12582.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RCL66720.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RDI95066.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RLS66247.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"RLT17137.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"RLT23870.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RMF54189.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RPF79760.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RZP28624.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TEX51253.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TVR25957.1","cluster":-1,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TVR90991.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"VIP02740.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"BDD16568.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"CP073016.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"CP121312.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"CP121331.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"CP136574.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GCD77160.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GCD80454.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GDX44761.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GDX48447.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GDX64887.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GDX66558.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GGC30146.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GGD16574.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GGF73035.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GGH88435.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GHB23597.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GIR21845.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GIR74196.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"GIR98463.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OX044355.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OX044356.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OX044357.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OX044362.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OY829281.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OY829375.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ243096.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ243102.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ244159.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ244580.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245719.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245731.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245746.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245751.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245756.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245839.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245886.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ245931.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ252014.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"OZ252262.1","cluster":0,"type":"Predicted","tm_cluster":"SC1","format":"cif"},{"id":"26OR1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"9OR8","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"AHE52940.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"AOF96519.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"BCA60302.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"BCA61338.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"CP136575.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"EDP63929.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"EXS71053.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GGA49527.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GGB53743.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GGD04646.1","cluster":1,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GGE22526.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GGE78254.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GHH23836.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"J1U1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"JOBD13","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"JOOD22","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"JPL28","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"JWL2","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KIN73522.1","cluster":1,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"KKC31033.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KPF93223.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KQM62812.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KQM73760.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KQN08864.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KQN28516.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KTF68840.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"L1BD2","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"L1BT3","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"L1CD2B","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"L1DT4B","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"LKI02BS01","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"M1U20","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"MTK02EP03","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OAN57215.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"ODT58092.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OHC98024.1","cluster":1,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"OHD05260.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYW29954.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYX52601.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYX57372.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYX73886.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYY69292.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYY97977.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OYZ61278.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OZ252211.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OZA83208.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PBN43411.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PIX67554.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PJK06NCP03","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"POU06NBS01","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"POU06NCP01","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PVX30487.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PZN99150.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PZO09322.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PZO76000.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"QBM75193.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RFU11683.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RRQ51041.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RXD06694.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RYD68531.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"S2H28","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"S3H21","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"SKI02AP11","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"SKI02AS03","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"SKI02CP10","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"SN06pond07","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"SSN206AS01","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TGN61835.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TJZ84602.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TPG09633.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TPG52660.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TVQ33031.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TVS12205.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"VOU06NAS01","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"VVT24364.1","cluster":1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"AJW80239.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"ANP74617.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"ASD22500.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"AWG02835.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"AZI59391.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"BBX67830.1","cluster":2,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"BDX33020.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GDX17393.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GDX33038.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GGF14204.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GGF92574.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GGL05201.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GLP76198.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"KAA0928310.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"KAA9111499.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"KQP67191.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"KQQ42193.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"KQY09766.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"OFE15031.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"OJY43810.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"OUM42966.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"OZE29894.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"OZE95541.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PHX60469.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PND56870.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"POH64568.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"POH71228.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PPB45911.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PPB48466.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PPF85931.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PVE17425.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"PXA72408.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"QHO71000.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"RFA12328.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"RFA18018.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"RFA18400.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"RFA24929.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"RJT90601.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFB54523.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFB81715.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFB89747.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFB90653.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFB96360.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFB99530.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC16264.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC17038.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC25459.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC31694.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC80037.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC80606.1","cluster":2,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TFC85940.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFC91058.1","cluster":2,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TFD08492.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFD24290.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFD28381.1","cluster":2,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TFD76712.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFD76797.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFD85230.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TFD93427.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TIH31229.1","cluster":2,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"TPG37408.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TPV25452.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"TVS86872.1","cluster":2,"type":"Predicted","tm_cluster":"SC3","format":"cif"},{"id":"GDX16682.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GDX21556.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GDX22696.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"GDX24649.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KRO30341.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KRO36646.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KRO49903.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"KRO51529.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PHX75877.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"QLL24047.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"QLL25445.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TRZ73044.1","cluster":3,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TSA20550.1","cluster":3,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"PEN15075.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PJF31817.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PQJ33473.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PSQ65031.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PSQ66410.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PSQ94854.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PSQ94898.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"PSQ95756.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RMH64933.1","cluster":4,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"ANE44876.1","cluster":5,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"ESA36503.1","cluster":5,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GGJ70114.1","cluster":5,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"GGR19346.1","cluster":5,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"OZ252009.1","cluster":5,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"OZ252036.1","cluster":5,"type":"Predicted","tm_cluster":"SC2","format":"cif"},{"id":"PJF35373.1","cluster":-1,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"RZM77228.1","cluster":5,"type":"Predicted","tm_cluster":"SC4","format":"cif"},{"id":"TVP63961.1","cluster":5,"type":"Predicted","tm_cluster":"SC4","format":"cif"}];
+    let proteins = [{"id":"3DDL","cluster":4,"format":"cif","experimental":true,"type":"Experimental","tm_cluster":"TM13"},{"id":"BDP42045","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"BDP99755","cluster":-1,"type":"Predicted","tm_cluster":"TM11"},{"id":"BDS48601","cluster":-1,"type":"Predicted","tm_cluster":"TM11"},{"id":"BDS50908","cluster":-1,"type":"Predicted","tm_cluster":"TM11"},{"id":"BDU10525","cluster":-1,"type":"Predicted","tm_cluster":"TM11"},{"id":"CP030884","cluster":-1,"type":"Predicted","tm_cluster":"TM10"},{"id":"CP175953","cluster":-1,"type":"Predicted","tm_cluster":"TM3"},{"id":"GDX15377","cluster":-1,"type":"Predicted","tm_cluster":"TM8"},{"id":"GDX68660","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGD58117","cluster":-1,"type":"Predicted","tm_cluster":"TM3"},{"id":"GGL78780","cluster":-1,"type":"Predicted","tm_cluster":"TM3"},{"id":"GIJ78539","cluster":-1,"type":"Predicted","tm_cluster":"TM3"},{"id":"GIK75739","cluster":-1,"type":"Predicted","tm_cluster":"TM6"},{"id":"GLV48970","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KGA09086","cluster":-1,"type":"Predicted","tm_cluster":"TM8"},{"id":"KRO48502","cluster":-1,"type":"Predicted","tm_cluster":"TM11"},{"id":"8I2Z","cluster":-1,"format":"cif","experimental":true,"type":"Experimental","tm_cluster":"TM7"},{"id":"OY829846","cluster":-1,"type":"Predicted","tm_cluster":"TM10"},{"id":"OZ243888","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OZ244400","cluster":-1,"type":"Predicted","tm_cluster":"TM6"},{"id":"OZ252252","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PDH56100","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PNY79880","cluster":-1,"type":"Predicted","tm_cluster":"TM7"},{"id":"PQM62056","cluster":-1,"type":"Predicted","tm_cluster":"TM5"},{"id":"PSN19400","cluster":-1,"type":"Predicted","tm_cluster":"TM2"},{"id":"PSQ71425","cluster":-1,"type":"Predicted","tm_cluster":"TM9"},{"id":"PSQ75764","cluster":-1,"type":"Predicted","tm_cluster":"TM9"},{"id":"PTM12582","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RCL66720","cluster":-1,"type":"Predicted","tm_cluster":"TM12"},{"id":"RDI95066","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RLS66247","cluster":-1,"type":"Predicted","tm_cluster":"TM10"},{"id":"RLT17137","cluster":-1,"type":"Predicted","tm_cluster":"TM10"},{"id":"RLT23870","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RMF54189","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RPF79760","cluster":-1,"type":"Predicted","tm_cluster":"TM12"},{"id":"RZP28624","cluster":-1,"type":"Predicted","tm_cluster":"TM5"},{"id":"TEX51253","cluster":-1,"type":"Predicted","tm_cluster":"TM5"},{"id":"TVR25957","cluster":-1,"type":"Predicted","tm_cluster":"TM2"},{"id":"TVR90991","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"VIP02740","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"BDD16568","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"CP073016","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"CP121312","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"CP121331","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"CP136574","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GCD77160","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GCD80454","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GDX44761","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GDX48447","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GDX64887","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GDX66558","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GGC30146","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GGD16574","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GGF73035","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GGH88435","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GHB23597","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GIR21845","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GIR74196","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"GIR98463","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OX044355","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OX044356","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OX044357","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OX044362","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OY829281","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OY829375","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ243096","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ243102","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ244159","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ244580","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245719","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245731","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245746","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245751","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245756","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245839","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245886","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ245931","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ252014","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"OZ252262","cluster":0,"type":"Predicted","tm_cluster":"TM1"},{"id":"26OR1","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"9OR8","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"AHE52940","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"AOF96519","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"BCA60302","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"BCA61338","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"CP136575","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"EDP63929","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"EXS71053","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGA49527","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGB53743","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGD04646","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGE22526","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGE78254","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"GHH23836","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"J1U1","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"JOBD13","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"JOOD22","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"JPL28","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"JWL2","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KIN73522","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KKC31033","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KPF93223","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KQM62812","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KQM73760","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KQN08864","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KQN28516","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"KTF68840","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"L1BD2","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"L1BT3","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"L1CD2B","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"L1DT4B","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"LKI02BS01","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"M1U20","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"MTK02EP03","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OAN57215","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"ODT58092","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OHC98024","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OHD05260","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYW29954","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYX52601","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYX57372","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYX73886","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYY69292","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYY97977","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OYZ61278","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OZ252211","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"OZA83208","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PBN43411","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PIX67554","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PJK06NCP03","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"POU06NBS01","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"POU06NCP01","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PVX30487","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PZN99150","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PZO09322","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"PZO76000","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"QBM75193","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RFU11683","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RRQ51041","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RXD06694","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RYD68531","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"S2H28","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"S3H21","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"SKI02AP11","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"SKI02AS03","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"SKI02CP10","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"SN06POND07","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"SSN206AS01","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"TGN61835","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"TJZ84602","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"TPG09633","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"TPG52660","cluster":1,"type":"Predicted","tm_cluster":"TM7"},{"id":"TVQ33031","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"TVS12205","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"VOU06NAS01","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"VVT24364","cluster":1,"type":"Predicted","tm_cluster":"TM13"},{"id":"AJW80239","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"ANP74617","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"ASD22500","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"AWG02835","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"AZI59391","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"BBX67830","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"BDX33020","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GDX17393","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GDX33038","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GGF14204","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GGF92574","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GGL05201","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GLP76198","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"KAA0928310","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"KAA9111499","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"KQP67191","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"KQQ42193","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"KQY09766","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"OFE15031","cluster":2,"type":"Predicted","tm_cluster":"TM8"},{"id":"OJY43810","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"OUM42966","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"OZE29894","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"OZE95541","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"PHX60469","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"PND56870","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"POH64568","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"POH71228","cluster":2,"type":"Predicted","tm_cluster":"TM7"},{"id":"PPB45911","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"PPB48466","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"PPF85931","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"PVE17425","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"PXA72408","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"QHO71000","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"RFA12328","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"RFA18018","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"RFA18400","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"RFA24929","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"RJT90601","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFB54523","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFB81715","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFB89747","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFB90653","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFB96360","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFB99530","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC16264","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC17038","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC25459","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC31694","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC80037","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC80606","cluster":2,"type":"Predicted","tm_cluster":"TM5"},{"id":"TFC85940","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFC91058","cluster":2,"type":"Predicted","tm_cluster":"TM5"},{"id":"TFD08492","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFD24290","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFD28381","cluster":2,"type":"Predicted","tm_cluster":"TM5"},{"id":"TFD76712","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFD76797","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFD85230","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TFD93427","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TIH31229","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TPG37408","cluster":2,"type":"Predicted","tm_cluster":"TM13"},{"id":"TPV25452","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"TVS86872","cluster":2,"type":"Predicted","tm_cluster":"TM11"},{"id":"GDX16682","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"GDX21556","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"GDX22696","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"GDX24649","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"KRO30341","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"KRO36646","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"KRO49903","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"KRO51529","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"PHX75877","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"QLL24047","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"QLL25445","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"TRZ73044","cluster":3,"type":"Predicted","tm_cluster":"TM12"},{"id":"TSA20550","cluster":3,"type":"Predicted","tm_cluster":"TM2"},{"id":"PEN15075","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PJF31817","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PQJ33473","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PSQ65031","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PSQ66410","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PSQ94854","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PSQ94898","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"PSQ95756","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"RMH64933","cluster":4,"type":"Predicted","tm_cluster":"TM13"},{"id":"ANE44876","cluster":5,"type":"Predicted","tm_cluster":"TM7"},{"id":"ESA36503","cluster":5,"type":"Predicted","tm_cluster":"TM4"},{"id":"GGJ70114","cluster":5,"type":"Predicted","tm_cluster":"TM13"},{"id":"GGR19346","cluster":5,"type":"Predicted","tm_cluster":"TM13"},{"id":"OZ252009","cluster":5,"type":"Predicted","tm_cluster":"TM13"},{"id":"OZ252036","cluster":5,"type":"Predicted","tm_cluster":"TM13"},{"id":"PJF35373","cluster":-1,"type":"Predicted","tm_cluster":"TM13"},{"id":"RZM77228","cluster":5,"type":"Predicted","tm_cluster":"TM13"},{"id":"TVP63961","cluster":5,"type":"Predicted","tm_cluster":"TM13"}];
     let conservedResidues = {
-  "ABC44767.1": {
+  "3DDL": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -60,7 +60,7 @@
     "240": "lime",
     "156": "gold"
   },
-  "BDP42045.1": {
+  "BDP42045": {
     "150": "blue",
     "157": "orange",
     "160": "black",
@@ -78,7 +78,7 @@
     "232": "lime",
     "153": "gold"
   },
-  "BDP99755.1": {
+  "BDP99755": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -96,7 +96,7 @@
     "232": "lime",
     "152": "gold"
   },
-  "BDS48601.1": {
+  "BDS48601": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -114,7 +114,7 @@
     "231": "lime",
     "151": "gold"
   },
-  "BDS50908.1": {
+  "BDS50908": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -132,7 +132,7 @@
     "234": "lime",
     "151": "gold"
   },
-  "BDU10525.1": {
+  "BDU10525": {
     "157": "blue",
     "164": "orange",
     "167": "black",
@@ -150,7 +150,7 @@
     "240": "lime",
     "160": "gold"
   },
-  "CP030884.1": {
+  "CP030884": {
     "159": "blue",
     "166": "orange",
     "169": "black",
@@ -168,7 +168,7 @@
     "250": "lime",
     "162": "gold"
   },
-  "CP175953.1": {
+  "CP175953": {
     "171": "blue",
     "178": "orange",
     "181": "black",
@@ -186,7 +186,7 @@
     "259": "lime",
     "174": "gold"
   },
-  "GDX15377.1": {
+  "GDX15377": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -204,7 +204,7 @@
     "232": "lime",
     "144": "gold"
   },
-  "GDX68660.1": {
+  "GDX68660": {
     "145": "blue",
     "152": "orange",
     "155": "black",
@@ -222,7 +222,7 @@
     "227": "lime",
     "148": "gold"
   },
-  "GGD58117.1": {
+  "GGD58117": {
     "168": "blue",
     "175": "orange",
     "178": "black",
@@ -240,7 +240,7 @@
     "249": "lime",
     "171": "gold"
   },
-  "GGL78780.1": {
+  "GGL78780": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -258,7 +258,7 @@
     "234": "lime",
     "156": "gold"
   },
-  "GIJ78539.1": {
+  "GIJ78539": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -276,7 +276,7 @@
     "234": "lime",
     "156": "gold"
   },
-  "GIK75739.1": {
+  "GIK75739": {
     "158": "blue",
     "165": "orange",
     "168": "black",
@@ -294,7 +294,7 @@
     "239": "lime",
     "161": "gold"
   },
-  "GLV48970.1": {
+  "GLV48970": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -312,7 +312,7 @@
     "233": "lime",
     "152": "gold"
   },
-  "KGA09086.1": {
+  "KGA09086": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -330,7 +330,7 @@
     "238": "lime",
     "152": "gold"
   },
-  "KRO48502.1": {
+  "KRO48502": {
     "142": "blue",
     "149": "orange",
     "152": "black",
@@ -348,7 +348,7 @@
     "225": "lime",
     "145": "gold"
   },
-  "Kin4B8": {
+  "8I2Z": {
     "150": "blue",
     "157": "orange",
     "160": "black",
@@ -366,7 +366,7 @@
     "233": "lime",
     "153": "gold"
   },
-  "OY829846.1": {
+  "OY829846": {
     "159": "blue",
     "166": "orange",
     "169": "black",
@@ -384,7 +384,7 @@
     "250": "lime",
     "162": "gold"
   },
-  "OZ243888.1": {
+  "OZ243888": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -402,7 +402,7 @@
     "236": "lime",
     "152": "gold"
   },
-  "OZ244400.1": {
+  "OZ244400": {
     "167": "blue",
     "174": "orange",
     "177": "black",
@@ -420,7 +420,7 @@
     "254": "lime",
     "170": "gold"
   },
-  "OZ252252.1": {
+  "OZ252252": {
     "172": "blue",
     "179": "orange",
     "182": "black",
@@ -438,7 +438,7 @@
     "255": "lime",
     "175": "gold"
   },
-  "PDH56100.1": {
+  "PDH56100": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -456,7 +456,7 @@
     "231": "lime",
     "152": "gold"
   },
-  "PNY79880.1": {
+  "PNY79880": {
     "167": "blue",
     "174": "orange",
     "177": "black",
@@ -474,7 +474,7 @@
     "251": "lime",
     "170": "gold"
   },
-  "PQM62056.1": {
+  "PQM62056": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -492,7 +492,7 @@
     "217": "lime",
     "138": "gold"
   },
-  "PSN19400.1": {
+  "PSN19400": {
     "96": "blue",
     "103": "orange",
     "106": "black",
@@ -510,7 +510,7 @@
     "178": "lime",
     "99": "gold"
   },
-  "PSQ71425.1": {
+  "PSQ71425": {
     "158": "blue",
     "165": "orange",
     "168": "black",
@@ -528,7 +528,7 @@
     "240": "lime",
     "161": "gold"
   },
-  "PSQ75764.1": {
+  "PSQ75764": {
     "157": "blue",
     "164": "orange",
     "167": "black",
@@ -546,7 +546,7 @@
     "239": "lime",
     "160": "gold"
   },
-  "PTM12582.1": {
+  "PTM12582": {
     "150": "blue",
     "157": "orange",
     "160": "black",
@@ -564,7 +564,7 @@
     "232": "lime",
     "153": "gold"
   },
-  "RCL66720.1": {
+  "RCL66720": {
     "151": "blue",
     "158": "orange",
     "161": "black",
@@ -582,7 +582,7 @@
     "233": "lime",
     "154": "gold"
   },
-  "RDI95066.1": {
+  "RDI95066": {
     "154": "blue",
     "161": "orange",
     "164": "black",
@@ -600,7 +600,7 @@
     "236": "lime",
     "157": "gold"
   },
-  "RLS66247.1": {
+  "RLS66247": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -618,7 +618,7 @@
     "240": "lime",
     "152": "gold"
   },
-  "RLT17137.1": {
+  "RLT17137": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -636,7 +636,7 @@
     "240": "lime",
     "152": "gold"
   },
-  "RLT23870.1": {
+  "RLT23870": {
     "150": "blue",
     "157": "orange",
     "160": "black",
@@ -654,7 +654,7 @@
     "232": "lime",
     "153": "gold"
   },
-  "RMF54189.1": {
+  "RMF54189": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -672,7 +672,7 @@
     "231": "lime",
     "149": "gold"
   },
-  "RPF79760.1": {
+  "RPF79760": {
     "151": "blue",
     "158": "orange",
     "161": "black",
@@ -690,7 +690,7 @@
     "233": "lime",
     "154": "gold"
   },
-  "RZP28624.1": {
+  "RZP28624": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -708,7 +708,7 @@
     "217": "lime",
     "138": "gold"
   },
-  "TEX51253.1": {
+  "TEX51253": {
     "132": "blue",
     "139": "orange",
     "142": "black",
@@ -726,7 +726,7 @@
     "214": "lime",
     "135": "gold"
   },
-  "TVR25957.1": {
+  "TVR25957": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -744,7 +744,7 @@
     "217": "lime",
     "138": "gold"
   },
-  "TVR90991.1": {
+  "TVR90991": {
     "147": "blue",
     "154": "orange",
     "157": "black",
@@ -762,7 +762,7 @@
     "229": "lime",
     "150": "gold"
   },
-  "VIP02740.1": {
+  "VIP02740": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -780,7 +780,7 @@
     "244": "lime",
     "155": "gold"
   },
-  "BDD16568.1": {
+  "BDD16568": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -797,7 +797,7 @@
     "230": "lime",
     "144": "gold"
   },
-  "CP073016.1": {
+  "CP073016": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -814,7 +814,7 @@
     "227": "lime",
     "143": "gold"
   },
-  "CP121312.1": {
+  "CP121312": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -831,7 +831,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "CP121331.1": {
+  "CP121331": {
     "138": "blue",
     "145": "orange",
     "148": "black",
@@ -848,7 +848,7 @@
     "225": "lime",
     "141": "gold"
   },
-  "CP136574.1": {
+  "CP136574": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -865,7 +865,7 @@
     "224": "lime",
     "143": "gold"
   },
-  "GCD77160.1": {
+  "GCD77160": {
     "151": "blue",
     "158": "orange",
     "161": "black",
@@ -882,7 +882,7 @@
     "238": "lime",
     "154": "gold"
   },
-  "GCD80454.1": {
+  "GCD80454": {
     "142": "blue",
     "149": "orange",
     "152": "black",
@@ -899,7 +899,7 @@
     "229": "lime",
     "145": "gold"
   },
-  "GDX44761.1": {
+  "GDX44761": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -916,7 +916,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "GDX48447.1": {
+  "GDX48447": {
     "132": "blue",
     "139": "orange",
     "142": "black",
@@ -934,7 +934,7 @@
     "223": "lime",
     "135": "gold"
   },
-  "GDX64887.1": {
+  "GDX64887": {
     "136": "blue",
     "143": "orange",
     "146": "black",
@@ -952,7 +952,7 @@
     "227": "lime",
     "139": "gold"
   },
-  "GDX66558.1": {
+  "GDX66558": {
     "136": "blue",
     "143": "orange",
     "146": "black",
@@ -970,7 +970,7 @@
     "227": "lime",
     "139": "gold"
   },
-  "GGC30146.1": {
+  "GGC30146": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -987,7 +987,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "GGD16574.1": {
+  "GGD16574": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -1004,7 +1004,7 @@
     "225": "lime",
     "143": "gold"
   },
-  "GGF73035.1": {
+  "GGF73035": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1021,7 +1021,7 @@
     "228": "lime",
     "144": "gold"
   },
-  "GGH88435.1": {
+  "GGH88435": {
     "142": "blue",
     "149": "orange",
     "152": "black",
@@ -1038,7 +1038,7 @@
     "229": "lime",
     "145": "gold"
   },
-  "GHB23597.1": {
+  "GHB23597": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1055,7 +1055,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "GIR21845.1": {
+  "GIR21845": {
     "132": "blue",
     "139": "orange",
     "142": "black",
@@ -1072,7 +1072,7 @@
     "225": "lime",
     "135": "gold"
   },
-  "GIR74196.1": {
+  "GIR74196": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1090,7 +1090,7 @@
     "227": "lime",
     "149": "gold"
   },
-  "GIR98463.1": {
+  "GIR98463": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -1107,7 +1107,7 @@
     "226": "lime",
     "143": "gold"
   },
-  "OX044355.1": {
+  "OX044355": {
     "175": "blue",
     "182": "orange",
     "185": "black",
@@ -1125,7 +1125,7 @@
     "261": "lime",
     "178": "gold"
   },
-  "OX044356.1": {
+  "OX044356": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1143,7 +1143,7 @@
     "232": "lime",
     "149": "gold"
   },
-  "OX044357.1": {
+  "OX044357": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -1160,7 +1160,7 @@
     "227": "lime",
     "143": "gold"
   },
-  "OX044362.1": {
+  "OX044362": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1177,7 +1177,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "OY829281.1": {
+  "OY829281": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -1194,7 +1194,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "OY829375.1": {
+  "OY829375": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -1211,7 +1211,7 @@
     "221": "lime",
     "138": "gold"
   },
-  "OZ243096.1": {
+  "OZ243096": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -1228,7 +1228,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "OZ243102.1": {
+  "OZ243102": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -1245,7 +1245,7 @@
     "221": "lime",
     "138": "gold"
   },
-  "OZ244159.1": {
+  "OZ244159": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -1262,7 +1262,7 @@
     "224": "lime",
     "143": "gold"
   },
-  "OZ244580.1": {
+  "OZ244580": {
     "138": "blue",
     "145": "orange",
     "148": "black",
@@ -1279,7 +1279,7 @@
     "223": "lime",
     "141": "gold"
   },
-  "OZ245719.1": {
+  "OZ245719": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1296,7 +1296,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "OZ245731.1": {
+  "OZ245731": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1313,7 +1313,7 @@
     "228": "lime",
     "144": "gold"
   },
-  "OZ245746.1": {
+  "OZ245746": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -1330,7 +1330,7 @@
     "221": "lime",
     "138": "gold"
   },
-  "OZ245751.1": {
+  "OZ245751": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1347,7 +1347,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "OZ245756.1": {
+  "OZ245756": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -1364,7 +1364,7 @@
     "221": "lime",
     "138": "gold"
   },
-  "OZ245839.1": {
+  "OZ245839": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -1381,7 +1381,7 @@
     "221": "lime",
     "138": "gold"
   },
-  "OZ245886.1": {
+  "OZ245886": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -1398,7 +1398,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "OZ245931.1": {
+  "OZ245931": {
     "141": "blue",
     "148": "orange",
     "151": "black",
@@ -1415,7 +1415,7 @@
     "226": "lime",
     "144": "gold"
   },
-  "OZ252014.1": {
+  "OZ252014": {
     "135": "blue",
     "142": "orange",
     "145": "black",
@@ -1432,7 +1432,7 @@
     "221": "lime",
     "138": "gold"
   },
-  "OZ252262.1": {
+  "OZ252262": {
     "140": "blue",
     "147": "orange",
     "150": "black",
@@ -1485,7 +1485,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "AHE52940.1": {
+  "AHE52940": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1503,7 +1503,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "AOF96519.1": {
+  "AOF96519": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1521,7 +1521,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "BCA60302.1": {
+  "BCA60302": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1539,7 +1539,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "BCA61338.1": {
+  "BCA61338": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1557,7 +1557,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "CP136575.1": {
+  "CP136575": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1575,7 +1575,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "EDP63929.1": {
+  "EDP63929": {
     "147": "blue",
     "154": "orange",
     "157": "black",
@@ -1593,7 +1593,7 @@
     "230": "lime",
     "150": "gold"
   },
-  "EXS71053.1": {
+  "EXS71053": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1611,7 +1611,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "GGA49527.1": {
+  "GGA49527": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1629,7 +1629,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "GGB53743.1": {
+  "GGB53743": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1647,7 +1647,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "GGD04646.1": {
+  "GGD04646": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1665,7 +1665,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "GGE22526.1": {
+  "GGE22526": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1683,7 +1683,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "GGE78254.1": {
+  "GGE78254": {
     "159": "blue",
     "166": "orange",
     "169": "black",
@@ -1701,7 +1701,7 @@
     "241": "lime",
     "162": "gold"
   },
-  "GHH23836.1": {
+  "GHH23836": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1809,7 +1809,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KIN73522.1": {
+  "KIN73522": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1827,7 +1827,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KKC31033.1": {
+  "KKC31033": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1845,7 +1845,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KPF93223.1": {
+  "KPF93223": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1863,7 +1863,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KQM62812.1": {
+  "KQM62812": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1881,7 +1881,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KQM73760.1": {
+  "KQM73760": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1899,7 +1899,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KQN08864.1": {
+  "KQN08864": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1917,7 +1917,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KQN28516.1": {
+  "KQN28516": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -1935,7 +1935,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "KTF68840.1": {
+  "KTF68840": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -2079,7 +2079,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OAN57215.1": {
+  "OAN57215": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -2097,7 +2097,7 @@
     "230": "lime",
     "151": "gold"
   },
-  "ODT58092.1": {
+  "ODT58092": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -2115,7 +2115,7 @@
     "237": "lime",
     "158": "gold"
   },
-  "OHC98024.1": {
+  "OHC98024": {
     "149": "blue",
     "156": "orange",
     "159": "black",
@@ -2133,7 +2133,7 @@
     "231": "lime",
     "152": "gold"
   },
-  "OHD05260.1": {
+  "OHD05260": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2151,7 +2151,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYW29954.1": {
+  "OYW29954": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2169,7 +2169,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYX52601.1": {
+  "OYX52601": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2187,7 +2187,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYX57372.1": {
+  "OYX57372": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2205,7 +2205,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYX73886.1": {
+  "OYX73886": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2223,7 +2223,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYY69292.1": {
+  "OYY69292": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2241,7 +2241,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYY97977.1": {
+  "OYY97977": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2259,7 +2259,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OYZ61278.1": {
+  "OYZ61278": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2277,7 +2277,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OZ252211.1": {
+  "OZ252211": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2295,7 +2295,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "OZA83208.1": {
+  "OZA83208": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2313,7 +2313,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "PBN43411.1": {
+  "PBN43411": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2331,7 +2331,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "PIX67554.1": {
+  "PIX67554": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2403,7 +2403,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "PVX30487.1": {
+  "PVX30487": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -2421,7 +2421,7 @@
     "230": "lime",
     "151": "gold"
   },
-  "PZN99150.1": {
+  "PZN99150": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2439,7 +2439,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "PZO09322.1": {
+  "PZO09322": {
     "147": "blue",
     "154": "orange",
     "157": "black",
@@ -2457,7 +2457,7 @@
     "230": "lime",
     "150": "gold"
   },
-  "PZO76000.1": {
+  "PZO76000": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2475,7 +2475,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "QBM75193.1": {
+  "QBM75193": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2493,7 +2493,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "RFU11683.1": {
+  "RFU11683": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2511,7 +2511,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "RRQ51041.1": {
+  "RRQ51041": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2529,7 +2529,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "RXD06694.1": {
+  "RXD06694": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2547,7 +2547,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "RYD68531.1": {
+  "RYD68531": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2655,7 +2655,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "SN06pond07": {
+  "SN06POND07": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2691,7 +2691,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "TGN61835.1": {
+  "TGN61835": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -2709,7 +2709,7 @@
     "237": "lime",
     "158": "gold"
   },
-  "TJZ84602.1": {
+  "TJZ84602": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -2727,7 +2727,7 @@
     "237": "lime",
     "158": "gold"
   },
-  "TPG09633.1": {
+  "TPG09633": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2745,7 +2745,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "TPG52660.1": {
+  "TPG52660": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2763,7 +2763,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "TVQ33031.1": {
+  "TVQ33031": {
     "147": "blue",
     "154": "orange",
     "157": "black",
@@ -2781,7 +2781,7 @@
     "230": "lime",
     "150": "gold"
   },
-  "TVS12205.1": {
+  "TVS12205": {
     "147": "blue",
     "154": "orange",
     "157": "black",
@@ -2817,7 +2817,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "VVT24364.1": {
+  "VVT24364": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -2835,7 +2835,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "AJW80239.1": {
+  "AJW80239": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -2853,7 +2853,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "ANP74617.1": {
+  "ANP74617": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -2871,7 +2871,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "ASD22500.1": {
+  "ASD22500": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -2889,7 +2889,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "AWG02835.1": {
+  "AWG02835": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -2907,7 +2907,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "AZI59391.1": {
+  "AZI59391": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -2925,7 +2925,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "BBX67830.1": {
+  "BBX67830": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -2943,7 +2943,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "BDX33020.1": {
+  "BDX33020": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -2961,7 +2961,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "GDX17393.1": {
+  "GDX17393": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -2979,7 +2979,7 @@
     "241": "lime",
     "155": "gold"
   },
-  "GDX33038.1": {
+  "GDX33038": {
     "159": "blue",
     "166": "orange",
     "169": "black",
@@ -2997,7 +2997,7 @@
     "241": "lime",
     "162": "gold"
   },
-  "GGF14204.1": {
+  "GGF14204": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3015,7 +3015,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "GGF92574.1": {
+  "GGF92574": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3033,7 +3033,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "GGL05201.1": {
+  "GGL05201": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3051,7 +3051,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "GLP76198.1": {
+  "GLP76198": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3069,7 +3069,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "KAA0928310.1": {
+  "KAA0928310": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3087,7 +3087,7 @@
     "236": "lime",
     "156": "gold"
   },
-  "KAA9111499.1": {
+  "KAA9111499": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3105,7 +3105,7 @@
     "234": "lime",
     "156": "gold"
   },
-  "KQP67191.1": {
+  "KQP67191": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -3123,7 +3123,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "KQQ42193.1": {
+  "KQQ42193": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -3141,7 +3141,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "KQY09766.1": {
+  "KQY09766": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3159,7 +3159,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "OFE15031.1": {
+  "OFE15031": {
     "157": "blue",
     "164": "orange",
     "167": "black",
@@ -3177,7 +3177,7 @@
     "242": "lime",
     "160": "gold"
   },
-  "OJY43810.1": {
+  "OJY43810": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3195,7 +3195,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "OUM42966.1": {
+  "OUM42966": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3213,7 +3213,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "OZE29894.1": {
+  "OZE29894": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3231,7 +3231,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "OZE95541.1": {
+  "OZE95541": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3249,7 +3249,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "PHX60469.1": {
+  "PHX60469": {
     "159": "blue",
     "166": "orange",
     "169": "black",
@@ -3267,7 +3267,7 @@
     "241": "lime",
     "162": "gold"
   },
-  "PND56870.1": {
+  "PND56870": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3285,7 +3285,7 @@
     "236": "lime",
     "156": "gold"
   },
-  "POH64568.1": {
+  "POH64568": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3303,7 +3303,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "POH71228.1": {
+  "POH71228": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3321,7 +3321,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "PPB45911.1": {
+  "PPB45911": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3339,7 +3339,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "PPB48466.1": {
+  "PPB48466": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3357,7 +3357,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "PPF85931.1": {
+  "PPF85931": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3375,7 +3375,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "PVE17425.1": {
+  "PVE17425": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3393,7 +3393,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "PXA72408.1": {
+  "PXA72408": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -3411,7 +3411,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "QHO71000.1": {
+  "QHO71000": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3429,7 +3429,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "RFA12328.1": {
+  "RFA12328": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3447,7 +3447,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "RFA18018.1": {
+  "RFA18018": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3465,7 +3465,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "RFA18400.1": {
+  "RFA18400": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3483,7 +3483,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "RFA24929.1": {
+  "RFA24929": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3501,7 +3501,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "RJT90601.1": {
+  "RJT90601": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3519,7 +3519,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFB54523.1": {
+  "TFB54523": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3537,7 +3537,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFB81715.1": {
+  "TFB81715": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3555,7 +3555,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFB89747.1": {
+  "TFB89747": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3573,7 +3573,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFB90653.1": {
+  "TFB90653": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3591,7 +3591,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFB96360.1": {
+  "TFB96360": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3609,7 +3609,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFB99530.1": {
+  "TFB99530": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3627,7 +3627,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC16264.1": {
+  "TFC16264": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3645,7 +3645,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC17038.1": {
+  "TFC17038": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3663,7 +3663,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC25459.1": {
+  "TFC25459": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3681,7 +3681,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC31694.1": {
+  "TFC31694": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3699,7 +3699,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC80037.1": {
+  "TFC80037": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3717,7 +3717,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC80606.1": {
+  "TFC80606": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -3735,7 +3735,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "TFC85940.1": {
+  "TFC85940": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3753,7 +3753,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFC91058.1": {
+  "TFC91058": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -3771,7 +3771,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "TFD08492.1": {
+  "TFD08492": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3789,7 +3789,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFD24290.1": {
+  "TFD24290": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3807,7 +3807,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFD28381.1": {
+  "TFD28381": {
     "137": "blue",
     "144": "orange",
     "147": "black",
@@ -3825,7 +3825,7 @@
     "219": "lime",
     "140": "gold"
   },
-  "TFD76712.1": {
+  "TFD76712": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3843,7 +3843,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFD76797.1": {
+  "TFD76797": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -3861,7 +3861,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "TFD85230.1": {
+  "TFD85230": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3879,7 +3879,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TFD93427.1": {
+  "TFD93427": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3897,7 +3897,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TIH31229.1": {
+  "TIH31229": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -3915,7 +3915,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "TPG37408.1": {
+  "TPG37408": {
     "152": "blue",
     "159": "orange",
     "162": "black",
@@ -3933,7 +3933,7 @@
     "234": "lime",
     "155": "gold"
   },
-  "TPV25452.1": {
+  "TPV25452": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3951,7 +3951,7 @@
     "235": "lime",
     "156": "gold"
   },
-  "TVS86872.1": {
+  "TVS86872": {
     "153": "blue",
     "160": "orange",
     "163": "black",
@@ -3969,7 +3969,7 @@
     "236": "lime",
     "156": "gold"
   },
-  "GDX16682.1": {
+  "GDX16682": {
     "145": "blue",
     "152": "orange",
     "155": "black",
@@ -3987,7 +3987,7 @@
     "227": "lime",
     "148": "gold"
   },
-  "GDX21556.1": {
+  "GDX21556": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -4005,7 +4005,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "GDX22696.1": {
+  "GDX22696": {
     "132": "blue",
     "139": "orange",
     "142": "black",
@@ -4023,7 +4023,7 @@
     "214": "lime",
     "135": "gold"
   },
-  "GDX24649.1": {
+  "GDX24649": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -4041,7 +4041,7 @@
     "230": "lime",
     "151": "gold"
   },
-  "KRO30341.1": {
+  "KRO30341": {
     "151": "blue",
     "158": "orange",
     "161": "black",
@@ -4059,7 +4059,7 @@
     "236": "lime",
     "154": "gold"
   },
-  "KRO36646.1": {
+  "KRO36646": {
     "145": "blue",
     "152": "orange",
     "155": "black",
@@ -4077,7 +4077,7 @@
     "227": "lime",
     "148": "gold"
   },
-  "KRO49903.1": {
+  "KRO49903": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -4095,7 +4095,7 @@
     "232": "lime",
     "151": "gold"
   },
-  "KRO51529.1": {
+  "KRO51529": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -4113,7 +4113,7 @@
     "232": "lime",
     "151": "gold"
   },
-  "PHX75877.1": {
+  "PHX75877": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -4131,7 +4131,7 @@
     "233": "lime",
     "149": "gold"
   },
-  "QLL24047.1": {
+  "QLL24047": {
     "147": "blue",
     "154": "orange",
     "157": "black",
@@ -4149,7 +4149,7 @@
     "229": "lime",
     "150": "gold"
   },
-  "QLL25445.1": {
+  "QLL25445": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -4167,7 +4167,7 @@
     "229": "lime",
     "149": "gold"
   },
-  "TRZ73044.1": {
+  "TRZ73044": {
     "145": "blue",
     "152": "orange",
     "155": "black",
@@ -4185,7 +4185,7 @@
     "228": "lime",
     "148": "gold"
   },
-  "TSA20550.1": {
+  "TSA20550": {
     "132": "blue",
     "139": "orange",
     "142": "black",
@@ -4203,7 +4203,7 @@
     "217": "lime",
     "135": "gold"
   },
-  "PEN15075.1": {
+  "PEN15075": {
     "154": "blue",
     "161": "orange",
     "164": "black",
@@ -4221,7 +4221,7 @@
     "240": "lime",
     "157": "gold"
   },
-  "PJF31817.1": {
+  "PJF31817": {
     "148": "blue",
     "155": "orange",
     "158": "black",
@@ -4239,7 +4239,7 @@
     "233": "lime",
     "151": "gold"
   },
-  "PQJ33473.1": {
+  "PQJ33473": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4257,7 +4257,7 @@
     "241": "lime",
     "158": "gold"
   },
-  "PSQ65031.1": {
+  "PSQ65031": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4275,7 +4275,7 @@
     "241": "lime",
     "158": "gold"
   },
-  "PSQ66410.1": {
+  "PSQ66410": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4293,7 +4293,7 @@
     "241": "lime",
     "158": "gold"
   },
-  "PSQ94854.1": {
+  "PSQ94854": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4311,7 +4311,7 @@
     "241": "lime",
     "158": "gold"
   },
-  "PSQ94898.1": {
+  "PSQ94898": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4329,7 +4329,7 @@
     "242": "lime",
     "158": "gold"
   },
-  "PSQ95756.1": {
+  "PSQ95756": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4347,7 +4347,7 @@
     "241": "lime",
     "158": "gold"
   },
-  "RMH64933.1": {
+  "RMH64933": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -4365,7 +4365,7 @@
     "228": "lime",
     "149": "gold"
   },
-  "ANE44876.1": {
+  "ANE44876": {
     "165": "blue",
     "172": "orange",
     "175": "black",
@@ -4383,7 +4383,7 @@
     "247": "lime",
     "168": "gold"
   },
-  "ESA36503.1": {
+  "ESA36503": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4401,7 +4401,7 @@
     "237": "lime",
     "158": "gold"
   },
-  "GGJ70114.1": {
+  "GGJ70114": {
     "168": "blue",
     "175": "orange",
     "178": "black",
@@ -4419,7 +4419,7 @@
     "250": "lime",
     "171": "gold"
   },
-  "GGR19346.1": {
+  "GGR19346": {
     "168": "blue",
     "175": "orange",
     "178": "black",
@@ -4437,7 +4437,7 @@
     "250": "lime",
     "171": "gold"
   },
-  "OZ252009.1": {
+  "OZ252009": {
     "173": "blue",
     "180": "orange",
     "183": "black",
@@ -4455,7 +4455,7 @@
     "255": "lime",
     "176": "gold"
   },
-  "OZ252036.1": {
+  "OZ252036": {
     "168": "blue",
     "175": "orange",
     "178": "black",
@@ -4473,7 +4473,7 @@
     "250": "lime",
     "171": "gold"
   },
-  "PJF35373.1": {
+  "PJF35373": {
     "146": "blue",
     "153": "orange",
     "156": "black",
@@ -4491,7 +4491,7 @@
     "231": "lime",
     "149": "gold"
   },
-  "RZM77228.1": {
+  "RZM77228": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4509,7 +4509,7 @@
     "237": "lime",
     "158": "gold"
   },
-  "TVP63961.1": {
+  "TVP63961": {
     "155": "blue",
     "162": "orange",
     "165": "black",
@@ -4528,11 +4528,7 @@
     "158": "gold"
   }
 };
-
-    const residueKeyAliases = {"3DDL":"ABC44767.1","8I2Z":"Kin4B8"};
-    const metadataKeyAliases = {"3DDL":"ABC44767.1","8I2Z":"Kin4B8"};
-
-    let proteinMetadata = {"GIR74196.1": {"IG/MAG": "MAG", "Location": "AS:Japan:180 km off the coast", "Environment": "Ocean, NW Pacific Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "GIR21845.1": {"IG/MAG": "MAG", "Location": "AS:Japan:180 km off the coast", "Environment": "Ocean, NW Pacific Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OY829375.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "Diatom: Epithemia sp. CRS-2021b", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245746.1": {"IG/MAG": "MAG", "Location": "NA:USA:Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium microadriaticum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ243102.1": {"IG/MAG": "MAG", "Location": "NA:USA:Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium pilosum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245839.1": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium tridacnidarum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252014.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:University of Derby", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium sp. D2", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245756.1": {"IG/MAG": "MAG", "Location": "NA:USA:Florida:University of South Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium microadriaticum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245931.1": {"IG/MAG": "MAG", "Location": "NA:USA:University of Connecticut:Avery Point campus", "Environment": "N/A", "Source/Sample": "Euglenozoa: Eutreptiella sp. Long Island Sound 2002", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245719.1": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium tridacnidarum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245751.1": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Breviolum psygmophilum", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX44761.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GDX48447.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GDX66558.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GDX64887.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GIR98463.1": {"IG/MAG": "MAG", "Location": "AS:Japan:180 km off the coast", "Environment": "Ocean, NW Pacific ", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ244580.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Abashiri:Entrance to Lake Notoro", "Environment": "Ocean, Pacific Ocean, fishing port", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OX044355.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ244159.1": {"IG/MAG": "MAG", "Location": "MENA:Oman:Bandar Al Khairan", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Noctiluca scintillans", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGD16574.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Lake Sayram", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP136574.1": {"IG/MAG": "MAG", "Location": "AS:South-Korea:Guri:Han River", "Environment": "City river", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ243096.1": {"IG/MAG": "MAG", "Location": "NA:USA:Florida:University of South Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium pilosum", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP121312.1": {"IG/MAG": "MAG", "Location": "EU:France:Bouin", "Environment": "Ocean, oyster beds", "Source/Sample": "Haslea ostrearia NCC 532 culture", "Host": "N/A", "Depth _Altitude": "N/A"}, "OY829281.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "Diatom: Epithemia sp. CRS-2021b", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252262.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:University of Derby", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium sp. D2", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245886.1": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Breviolum psygmophilum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OX044362.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGC30146.1": {"IG/MAG": "IG", "Location": "AS:China:Qinghai:Lake Tuosu", "Environment": "Saline lake", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "depth=1 m, salinity 5.4 %, w/w,pH 8.8 and temperature 20.1 °C"}, "GHB23597.1": {"IG/MAG": "IG", "Location": "AS:China:Mongolia plateau:Hunsandake Desert:Lake Dugerno", "Environment": "Haloalkaline lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "pH 9.5; 4 % salt"}, "OX044356.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDD16568.1": {"IG/MAG": "IG", "Location": "AS:Vietnam:Nhatrang:South China Sea", "Environment": "Ocean beach", "Source/Sample": "Beach sand", "Host": "N/A", "Depth _Altitude": "N/A"}, "GCD77160.1": {"IG/MAG": "IG", "Location": "AS:Japan:Nagano", "Environment": "Terrestrial hot spring", "Source/Sample": "Hot spring", "Host": "N/A", "Depth _Altitude": "N/A"}, "GCD80454.1": {"IG/MAG": "IG", "Location": "AS:Japan:Nagano", "Environment": "Terrestrial hot spring", "Source/Sample": "Hot spring", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGH88435.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Ulugh Muztagh glacier", "Environment": "Alpine glacier", "Source/Sample": "Ice core", "Host": "N/A", "Depth _Altitude": "depth 96.23 m, altitude=5770"}, "GGF73035.1": {"IG/MAG": "IG", "Location": "AS:China:Zhangye:Sunan Yugue Autonomous County:Qilian Mountains", "Environment": "Permafrost region", "Source/Sample": "Subsurface sandstone sediment", "Host": "N/A", "Depth _Altitude": "depth=356 m"}, "CP073016.1": {"IG/MAG": "MAG", "Location": "NA:USA:Washington:Wiser Lake ", "Environment": "Fresh water lake", "Source/Sample": "Environmental", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245731.1": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Breviolum psygmophilum", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP121331.1": {"IG/MAG": "MAG", "Location": "EU:France:Bouin", "Environment": "Ocean, oyster beds", "Source/Sample": "Haslea ostrearia NCC 532 culture", "Host": "N/A", "Depth _Altitude": "N/A"}, "OX044357.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVS12205.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1141 m"}, "TVQ33031.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1096 m"}, "PZO09322.1": {"IG/MAG": "MAG", "Location": "AQ:Antarctica", "Environment": "N/A", "Source/Sample": "Microbial mat ULC165", "Host": "N/A", "Depth _Altitude": "N/A"}, "EDP63929.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYX73886.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYW29954.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGE78254.1": {"IG/MAG": "IG", "Location": "AS:China:Qinhai:Haixi Mongol and Tibetan Autonomous Prefecture:Golmud", "Environment": "Alpine meadow", "Source/Sample": "Soil, meadow ", "Host": "N/A", "Depth _Altitude": "N/A"}, "S3H21": {"IG/MAG": "IG", "Location": "EU: Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "RXD06694.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "PZO76000.1": {"IG/MAG": "MAG", "Location": "NA:USA:Pittsburgh", "Environment": "Hospital", "Source/Sample": "Hospital NICU surfaces and sink samples", "Host": "N/A", "Depth _Altitude": "N/A"}, "KQN28516.1": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidopsis thaliana", "Depth _Altitude": "N/A"}, "JPL28": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "26OR1": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Seed", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "BCA61338.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Skarvsnes:Hotoke-Ike lake", "Environment": "Freshwater lake, ultra-oligotrophic ", "Source/Sample": "Lake water, ultra-oligotrophic, interstitial  water of a moss pillar on the bottom  ", "Host": "N/A", "Depth _Altitude": "N/A"}, "JWL2": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "JOBD13": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Bistorta vivipara", "Depth _Altitude": "N/A"}, "S2H28": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "9OR8": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Seed", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "L1DT4B": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "L1BD2": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "VOU06NAS01": {"IG/MAG": "IG", "Location": "EU:Finland:Oulu", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Vaccinium myrtillus", "Depth _Altitude": "N/A"}, "PJK06NCP03": {"IG/MAG": "IG", "Location": "EU:Finland:Jyväskylä", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Vaccinium vitis-idaea", "Depth _Altitude": "N/A"}, "VVT24364.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "KQN08864.1": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidopsis thaliana", "Depth _Altitude": "N/A"}, "GGE22526.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Ulugh Muztagh glacier", "Environment": "Glacier", "Source/Sample": "Ice core", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGA49527.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Midui glacier", "Environment": "Glacier", "Source/Sample": "Ice", "Host": "N/A", "Depth _Altitude": "N/A"}, "SKI02AP11": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "JOOD22": {"IG/MAG": "IG", "Location": "N/A", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "LKI02BS01": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Dryas octopetala", "Depth _Altitude": "N/A"}, "OYX52601.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "RYD68531.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:Norwich", "Environment": "Deciduous woodland, University campus", "Source/Sample": "Phyllosphere", "Host": "Populus alba", "Depth _Altitude": "N/A"}, "AHE52940.1": {"IG/MAG": "IG", "Location": "AS:China:Xinhe County", "Environment": "Agricultural", "Source/Sample": "Soil, cornfield", "Host": "N/A", "Depth _Altitude": "N/A"}, "SSN206AS01": {"IG/MAG": "IG", "Location": "NA:Denmark:Greenland:Station Nord2", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "L1BT3": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "POU06NBS01": {"IG/MAG": "IG", "Location": "EU:Finland:Oulu", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Vaccinium vitis-idaea", "Depth _Altitude": "N/A"}, "POU06NCP01": {"IG/MAG": "IG", "Location": "EU:Finland:Oulu", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Vaccinium vitis-idaea", "Depth _Altitude": "N/A"}, "KQM73760.1": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "L1CD2B": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "KQM62812.1": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "TPG09633.1": {"IG/MAG": "IG", "Location": "NA:Canada:Axel Heiberg Island", "Environment": "N/A", "Source/Sample": "Ice-wedge polygon", "Host": "N/A", "Depth _Altitude": "N/A"}, "SKI02CP10": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "SKI02AS03": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "QBM75193.1": {"IG/MAG": "IG", "Location": "EU:Austria:Tyrol:Lake Gossenkoellesee", "Environment": "Alpine lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GHH23836.1": {"IG/MAG": "IG", "Location": "EU:Austria:Tyrol:Innsbruck:Stubai Glacier", "Environment": "Alpine glacier", "Source/Sample": "Cryoconite", "Host": "N/A", "Depth _Altitude": "altitude=2900 m"}, "MTK02EP03": {"IG/MAG": "IG", "Location": "EU:Finland:Turku", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Pinus sylvestris", "Depth _Altitude": "N/A"}, "TPG52660.1": {"IG/MAG": "IG", "Location": "NA:Canada:Axel Heiberg Island", "Environment": "N/A", "Source/Sample": "Ice-wedge polygon", "Host": "N/A", "Depth _Altitude": "N/A"}, "M1U20": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "N/A", "Host": "Diapensia lapponica", "Depth _Altitude": "N/A"}, "J1U1": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "N/A", "Host": "Diapensia lapponica", "Depth _Altitude": "N/A"}, "TGN61835.1": {"IG/MAG": "IG", "Location": "AS:China:Qinghai Province", "Environment": "N/A", "Source/Sample": "Feces", "Host": "Tibetan antelope", "Depth _Altitude": "N/A"}, "TJZ84602.1": {"IG/MAG": "IG", "Location": "AS:South Korea:Yongin", "Environment": "N/A", "Source/Sample": "Rhizosphere", "Host": "Hibiscus syriacus (Mugunghwa)", "Depth _Altitude": "N/A"}, "ODT58092.1": {"IG/MAG": "MAG", "Location": "ZA:South Africa:Rondebosch:University of Cape Town", "Environment": "Bioreactor", "Source/Sample": "Cyanide and thiocyanate bioreactor", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252211.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "BCA60302.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Skarvsnes:Hotoke-Ike lake", "Environment": "Freshwater lake, ultra-oligotrophic", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PZN99150.1": {"IG/MAG": "MAG", "Location": "AQ:Antarctica", "Environment": "Glacier", "Source/Sample": "Microbial mat ULC165", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYX57372.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PIX67554.1": {"IG/MAG": "MAG", "Location": "NA:USA:Utah:Crystal Geyser near Green River", "Environment": "Ground water", "Source/Sample": "Ground water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGB53743.1": {"IG/MAG": "IG", "Location": "AS:China:Tibetan Plateau:Lake Pengcuo", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "altitude=4522 m"}, "OHC98024.1": {"IG/MAG": "MAG", "Location": "NA:USA:Colorado:Rifle", "Environment": "City", "Source/Sample": "Well, FP-101 under low O2", "Host": "N/A", "Depth _Altitude": "N/A"}, "OHD05260.1": {"IG/MAG": "MAG", "Location": "NA:USA:Colorado:Rifle", "Environment": "City", "Source/Sample": "Well, CD01", "Host": "N/A", "Depth _Altitude": "N/A"}, "EXS71053.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Scott Base", "Environment": "N/A", "Source/Sample": "Soil, oil-contaminated ", "Host": "N/A", "Depth _Altitude": "N/A"}, "PBN43411.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:South Shetland Islands", "Environment": "N/A", "Source/Sample": "Soil, diesel fuel contaminated ", "Host": "N/A", "Depth _Altitude": "N/A"}, "AOF96519.1": {"IG/MAG": "IG", "Location": "NA:USA:Washington:Seattle", "Environment": "N/A", "Source/Sample": "Phycosphere", "Host": "Chrysochromulina tobin ", "Depth _Altitude": "N/A"}, "OYY69292.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYY97977.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYZ61278.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZA83208.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "RRQ51041.1": {"IG/MAG": "IG", "Location": "AS:South Korea", "Environment": "N/A", "Source/Sample": "Wetland", "Host": "N/A", "Depth _Altitude": "N/A"}, "OAN57215.1": {"IG/MAG": "IG", "Location": "AS:Japan:Nagaoka", "Environment": "N/A", "Source/Sample": "Sediment", "Host": "N/A", "Depth _Altitude": "N/A"}, "KTF68840.1": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "Ocean", "Source/Sample": "Sea-mud", "Host": "N/A", "Depth _Altitude": "N/A"}, "PVX30487.1": {"IG/MAG": "IG", "Location": "AS:India:Kerala:Ernakulam", "Environment": "Rice paddy field", "Source/Sample": "Rhizosphere", "Host": "Oryza sativa L, Pokkali rice, saline tolerant", "Depth _Altitude": "N/A"}, "CP136575.1": {"IG/MAG": "MAG", "Location": "AS:South Korea:Guri:Han river", "Environment": "City river", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KPF93223.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KKC31033.1": {"IG/MAG": "IG", "Location": "EU:Austria:Tyrol", "Environment": "Alpine glacier", "Source/Sample": "Alpine glacier cryoconite", "Host": "N/A", "Depth _Altitude": "altitude=2875 m"}, "RFU11683.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Ayakekum Lake", "Environment": "Saline lake", "Source/Sample": "Lake water, saline", "Host": "N/A", "Depth _Altitude": "N/A"}, "KIN73522.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Vestfold Hills:Ekho Lake", "Environment": "Ocean, coast", "Source/Sample": "Seawater, coastal", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGD04646.1": {"IG/MAG": "IG", "Location": "AS:China:Qinghai Province:Qaidam basin:Lake Dasugan", "Environment": "Saline lake", "Source/Sample": "Lake water, saline", "Host": "N/A", "Depth _Altitude": "depth=0.3 m, salinity 3.1 %, dissolved oxygen 7.0 mg l− 1, pH 9.0 and temperature 12.8 °C"}, "SN06pond07": {"IG/MAG": "IG", "Location": "NA:Denmark:Greenland:Station Nord", "Environment": "Plant-associated", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ243888.1": {"IG/MAG": "MAG", "Location": "EU:Italy:Liguria:Lerici", "Environment": "N/A", "Source/Sample": "Lichen", "Host": "Lichina confinis", "Depth _Altitude": "N/A"}, "GDX15377.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO48502.1": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDP99755.1": {"IG/MAG": "IG", "Location": "AS:Japan:Saitama:Yoshimi:Ichino River:Kachi Bridge", "Environment": "River", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDU10525.1": {"IG/MAG": "IG", "Location": "AS:Japan:Fukushima:Inawashiro-machi yama-gun:Lake Inawashiro", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "surface water"}, "BDS50908.1": {"IG/MAG": "IG", "Location": "AS:Japan:Saitama:Yoshimi:Ichino River:Kachi Bridge", "Environment": "River", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDS48601.1": {"IG/MAG": "IG", "Location": "AS:Japan:Ibaraki:Lake Kasumigaura", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KGA09086.1": {"IG/MAG": "MAG", "Location": "EU:Spain:Valencia:Embalse de Amadorio reservoir", "Environment": "Freshwater reservoir", "Source/Sample": "Lake water, reservoir", "Host": "N/A", "Depth _Altitude": "N/A"}, "RZP28624.1": {"IG/MAG": "MAG", "Location": "EU:Spain:Off the coast of Alicante", "Environment": "Mediterranean Sea", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PQM62056.1": {"IG/MAG": "MAG", "Location": "Atlantic Ocean:North Atlantic Ocean", "Environment": "Atlantic Ocean", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "TEX51253.1": {"IG/MAG": "MAG", "Location": "SA:Brazil:São Paulo:São Paolo Zoo", "Environment": "Freshwater lake in a zoo", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDP42045.1": {"IG/MAG": "IG", "Location": "AS:Japan", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ71425.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ75764.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVR25957.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1106 m"}, "PSN19400.1": {"IG/MAG": "IG", "Location": "NA:USA:Massachusetts:Cape Cod:Sippewissett Salt Marsh:Buzzards Bay", "Environment": "Salt marsh", "Source/Sample": "salt marsh", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVR90991.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252252.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "PNY79880.1": {"IG/MAG": "IG", "Location": "AS:South Korea", "Environment": "River", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "VIP02740.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "strain ATCC 43644", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP030884.1": {"IG/MAG": "MAG", "Location": "OC:USA:Guam:Outhouse Beach:Apra Harbor", "Environment": "NW Pacific ocean", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OY829846.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "Diatom: Epithemia sp. CRS-2021b", "Host": "N/A", "Depth _Altitude": "N/A"}, "RLT17137.1": {"IG/MAG": "MAG", "Location": "EU:Switzerland:Lake Zurich", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "40-80 m depth"}, "RLS66247.1": {"IG/MAG": "MAG", "Location": "EU:Switzerland:Lake Zurich", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "RDI95066.1": {"IG/MAG": "IG", "Location": "AS:China:Fujian", "Environment": "Hot spring", "Source/Sample": "Hot spring", "Host": "N/A", "Depth _Altitude": "N/A"}, "GLV48970.1": {"IG/MAG": "IG", "Location": "AS:Indonesia:West Java:Cisolok geothermal area", "Environment": "Nature park", "Source/Sample": "Litter", "Host": "N/A", "Depth _Altitude": "N/A"}, "RLT23870.1": {"IG/MAG": "MAG", "Location": "EU:Spain:Alicante:Amadorio reservoir", "Environment": "Freshwater reservoir", "Source/Sample": "Lake water, reservoir", "Host": "N/A", "Depth _Altitude": "10 m depth"}, "RPF79760.1": {"IG/MAG": "MAG", "Location": "EU:Mediterranean Sea", "Environment": "Mediterranean Sea", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "RCL66720.1": {"IG/MAG": "MAG", "Location": "EU:Spain:Off the coast of Alicante", "Environment": "Mediterranean Sea", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PTM12582.1": {"IG/MAG": "MAG", "Location": "NA:USA:Delaware:Delaware Bay", "Environment": "Atlantic Ocean", "Source/Sample": "Seawater, brackish", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX68660.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "RMF54189.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Tokyo Prefecture:Shikinejima Island:Jinata Onsen", "Environment": "Hot spring", "Source/Sample": "Hot spring, iron-rich", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGD58117.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:East Rongbuk Glacier", "Environment": "Glacier", "Source/Sample": "Ice core", "Host": "N/A", "Depth _Altitude": "N/A"}, "GIJ78539.1": {"IG/MAG": "IG", "Location": "AS:China:Heilongjiang:Harbin", "Environment": "N/A", "Source/Sample": "Root", "Host": "Phaseolus vulgaris", "Depth _Altitude": "N/A"}, "GGL78780.1": {"IG/MAG": "IG", "Location": "Atlantic Ocean", "Environment": "Atlantic Ocean", "Source/Sample": "Sediment, deep-sea ", "Host": "N/A", "Depth _Altitude": "depth=2983 m"}, "GIK75739.1": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Bioreactor", "Source/Sample": "Long-term freshwater anammox column reactor", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ244400.1": {"IG/MAG": "MAG", "Location": "EU:Italy:Liguria:Lerici", "Environment": "N/A", "Source/Sample": "Lichen", "Host": "Lichina confinis", "Depth _Altitude": "N/A"}, "CP175953.1": {"IG/MAG": "MAG", "Location": "NA:USA:Maryland:Baltimore", "Environment": "N/A", "Source/Sample": "Non-axenic microalgal culture", "Host": "Nannochloropsis oceanica", "Depth _Altitude": "N/A"}, "OFE15031.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Signy Island", "Environment": "N/A", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "KAA9111499.1": {"IG/MAG": "IG", "Location": "AS:South Korea:Gangwon:Hwacheon mountain", "Environment": "Mountains", "Source/Sample": "Rhizome", "Host": "Panax ginseng Meyer, eight year old", "Depth _Altitude": "N/A"}, "GGL05201.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TIH31229.1": {"IG/MAG": "IG", "Location": "SA:Chile:Llullaillaco volcano", "Environment": "Volcano lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "altitude=6170 m"}, "AZI59391.1": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "N/A", "Source/Sample": "strain=S14-144", "Host": "N/A", "Depth _Altitude": "N/A"}, "QHO71000.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica", "Environment": "N/A", "Source/Sample": "Sediment", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC16264.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "PPF85931.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "AWG02835.1": {"IG/MAG": "IG", "Location": "NA:USA:Kansas", "Environment": "N/A", "Source/Sample": "N/A", "Host": "Medicago sativa", "Depth _Altitude": "N/A"}, "AJW80239.1": {"IG/MAG": "IG", "Location": "NA:USA:Minnesota:Ramsey County ", "Environment": "N/A", "Source/Sample": "Stem tissue", "Host": "Medicago truncatula/Medicago sativa L.", "Depth _Altitude": "N/A"}, "RFA24929.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land:Mount Carson", "Environment": "Glacier", "Source/Sample": "Silt mudstone", "Host": "N/A", "Depth _Altitude": "altitude=2555 m"}, "RFA18018.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land:Eureka Spurs", "Environment": "Glacier", "Source/Sample": "Fine sandstone", "Host": "N/A", "Depth _Altitude": "altitude=1627 m"}, "RFA18400.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land:Eureka Spurs", "Environment": "Glacier", "Source/Sample": "Limestone", "Host": "N/A", "Depth _Altitude": "altitude=1652 m"}, "RFA12328.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:South Shetland islands:King George Island", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB90653.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC17038.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB96360.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "ANP74617.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land", "Environment": "Glacier", "Source/Sample": "Rock", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD93427.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "PXA72408.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "Arctic", "Source/Sample": "Soil, arctic", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB99530.1": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "POH71228.1": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "Glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "POH64568.1": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "N/A", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "ASD22500.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "altitude=3833 m"}, "GGF92574.1": {"IG/MAG": "IG", "Location": "EU:Germany:Thüringen", "Environment": "N/A", "Source/Sample": "Leaf", "Host": "Trifolium repens", "Depth _Altitude": "N/A"}, "OZE29894.1": {"IG/MAG": "IG", "Location": "NA:USA:Washington", "Environment": "N/A", "Source/Sample": "N/A", "Host": "Oenothera", "Depth _Altitude": "N/A"}, "OZE95541.1": {"IG/MAG": "IG", "Location": "NA:USA:Washington", "Environment": "N/A", "Source/Sample": "N/A", "Host": "Veronica", "Depth _Altitude": "N/A"}, "RJT90601.1": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD85230.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC25459.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB89747.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD24290.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD08492.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC80037.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB81715.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD76797.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Showa station", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD76712.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC80606.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC31694.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB54523.1": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC91058.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC85940.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD28381.1": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "PPB48466.1": {"IG/MAG": "IG", "Location": "MENA:Turkey:Black Sea Region:Samsun", "Environment": "Pine forest", "Source/Sample": "Caterpillar of the pine processionary moth", "Host": "Thaumetopoea pityocampa, Scots pine (Pinus sylvestris L.)", "Depth _Altitude": "N/A"}, "PVE17425.1": {"IG/MAG": "IG", "Location": "AS:Russia:Arctic Far East:Chukotka:Anyuy River near Anyuysk settlement", "Environment": "N/A", "Source/Sample": "strain=Bz4", "Host": "Bison priscus", "Depth _Altitude": "N/A"}, "PPB45911.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "TPV25452.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "OUM42966.1": {"IG/MAG": "IG", "Location": "EU:France:Noyant:Rabion", "Environment": "N/A", "Source/Sample": "Soil, agricultural ", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVS86872.1": {"IG/MAG": "IG", "Location": "EU:Switzerland", "Environment": "N/A", "Source/Sample": "strain=17-773", "Host": "Pig", "Depth _Altitude": "N/A"}, "BBX67830.1": {"IG/MAG": "IG", "Location": "EU:Spain:Salamanca", "Environment": "Near a uranium mine", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "PND56870.1": {"IG/MAG": "IG", "Location": "NA:USA", "Environment": "N/A", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "KAA0928310.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:King George Island:Admiralty Bay:Henryk Arctowski Polish Antarctic Station", "Environment": "Petroleum pumping and storage warehouse", "Source/Sample": "Soil, petroleum contaminated", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGF14204.1": {"IG/MAG": "IG", "Location": "EU:Germany:", "Environment": "N/A", "Source/Sample": "Leaf, surface", "Host": "Trifolium repens", "Depth _Altitude": "N/A"}, "OJY43810.1": {"IG/MAG": "MAG", "Location": "ZA:South-Africa:University of Cape Town", "Environment": "Ammonium sulfate bioreactor", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "KQP67191.1": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "KQQ42193.1": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "KQY09766.1": {"IG/MAG": "IG", "Location": "EU:Germany:Cologne", "Environment": "Greenhouse", "Source/Sample": "Root", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "BDX33020.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Skallen", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "GLP76198.1": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Langhovde", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "TPG37408.1": {"IG/MAG": "IG", "Location": "NA:Canada:Axel Heiberg Island", "Environment": "Glacier", "Source/Sample": "Ice-wedge polygon", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX17393.1": {"IG/MAG": "IG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX33038.1": {"IG/MAG": "IG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PHX60469.1": {"IG/MAG": "MAG", "Location": "AS:Russia:Southern Siberia:Lake Baikal", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PHX75877.1": {"IG/MAG": "MAG", "Location": "AS:Russia:Southern Siberia:Lake Baikal", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX16682.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX22696.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO36646.1": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "QLL24047.1": {"IG/MAG": "IG", "Location": "AS:South Korea:Lake Soyang", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "QLL25445.1": {"IG/MAG": "IG", "Location": "AS:South Korea:Lake Soyang", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX24649.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX21556.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "TRZ73044.1": {"IG/MAG": "MAG", "Location": "NA:Canada:British Columbia:Powell Lake South basin", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO30341.1": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO49903.1": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO51529.1": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "TSA20550.1": {"IG/MAG": "MAG", "Location": "NA:Canada:British Columbia:Powell Lake South basin", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PJF31817.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Nagano Prefecture:Nakabusa Onsen", "Environment": "Hot spring", "Source/Sample": "Hot spring, alkaline, sulfidic ", "Host": "N/A", "Depth _Altitude": "N/A"}, "RMH64933.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Tokyo Prefecture:Shikinejima Island", "Environment": "Hot spring", "Source/Sample": "Hot spring, iron-rich ", "Host": "N/A", "Depth _Altitude": "N/A"}, "PEN15075.1": {"IG/MAG": "IG", "Location": "AS:China:Shandong:Weihai Coast", "Environment": "Ocean, coast, river delta", "Source/Sample": "Marine solar saltern", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ94854.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ66410.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "ABC44767.1": {"IG/MAG": "IG", "Location": "EU:Spain:Mallorca", "Environment": "N/A", "Source/Sample": "Solar santern", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ94898.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ65031.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PQJ33473.1": {"IG/MAG": "IG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ95756.1": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PJF35373.1": {"IG/MAG": "MAG", "Location": "AS:Japan:Shikinejima:Jinata Onsen", "Environment": "Hot spring", "Source/Sample": "Hot spring, iron-rich ", "Host": "N/A", "Depth _Altitude": "N/A"}, "ANE44876.1": {"IG/MAG": "IG", "Location": "AS:South Korea:Mountain of Deogyusan", "Environment": "N/A", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252009.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "GGR19346.1": {"IG/MAG": "IG", "Location": "AS:South Korea", "Environment": "Garden", "Source/Sample": "Soil, garden", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGJ70114.1": {"IG/MAG": "IG", "Location": "AS:Japan:Tottori Prefecture:Misasa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252036.1": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "RZM77228.1": {"IG/MAG": "IG", "Location": "AS:India", "Environment": "Ocean, coast, river delta", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVP63961.1": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1090 m"}, "ESA36503.1": {"IG/MAG": "IG", "Location": "OC:Australia:Heron Island", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}};
+    let proteinMetadata = {"GIR74196": {"IG/MAG": "MAG", "Location": "AS:Japan:180 km off the coast", "Environment": "Ocean, NW Pacific Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "GIR21845": {"IG/MAG": "MAG", "Location": "AS:Japan:180 km off the coast", "Environment": "Ocean, NW Pacific Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OY829375": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "Diatom: Epithemia sp. CRS-2021b", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245746": {"IG/MAG": "MAG", "Location": "NA:USA:Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium microadriaticum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ243102": {"IG/MAG": "MAG", "Location": "NA:USA:Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium pilosum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245839": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium tridacnidarum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252014": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:University of Derby", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium sp. D2", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245756": {"IG/MAG": "MAG", "Location": "NA:USA:Florida:University of South Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium microadriaticum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245931": {"IG/MAG": "MAG", "Location": "NA:USA:University of Connecticut:Avery Point campus", "Environment": "N/A", "Source/Sample": "Euglenozoa: Eutreptiella sp. Long Island Sound 2002", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245719": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium tridacnidarum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245751": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Breviolum psygmophilum", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX44761": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GDX48447": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GDX66558": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GDX64887": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "GIR98463": {"IG/MAG": "MAG", "Location": "AS:Japan:180 km off the coast", "Environment": "Ocean, NW Pacific ", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ244580": {"IG/MAG": "MAG", "Location": "AS:Japan:Abashiri:Entrance to Lake Notoro", "Environment": "Ocean, Pacific Ocean, fishing port", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OX044355": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ244159": {"IG/MAG": "MAG", "Location": "MENA:Oman:Bandar Al Khairan", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Noctiluca scintillans", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGD16574": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Lake Sayram", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP136574": {"IG/MAG": "MAG", "Location": "AS:South-Korea:Guri:Han River", "Environment": "City river", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ243096": {"IG/MAG": "MAG", "Location": "NA:USA:Florida:University of South Florida", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium pilosum", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP121312": {"IG/MAG": "MAG", "Location": "EU:France:Bouin", "Environment": "Ocean, oyster beds", "Source/Sample": "Haslea ostrearia NCC 532 culture", "Host": "N/A", "Depth _Altitude": "N/A"}, "OY829281": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "Diatom: Epithemia sp. CRS-2021b", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252262": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:University of Derby", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Symbiodinium sp. D2", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245886": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Breviolum psygmophilum", "Host": "N/A", "Depth _Altitude": "N/A"}, "OX044362": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGC30146": {"IG/MAG": "IG", "Location": "AS:China:Qinghai:Lake Tuosu", "Environment": "Saline lake", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "depth=1 m, salinity 5.4 %, w/w,pH 8.8 and temperature 20.1 °C"}, "GHB23597": {"IG/MAG": "IG", "Location": "AS:China:Mongolia plateau:Hunsandake Desert:Lake Dugerno", "Environment": "Haloalkaline lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "pH 9.5; 4 % salt"}, "OX044356": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDD16568": {"IG/MAG": "IG", "Location": "AS:Vietnam:Nhatrang:South China Sea", "Environment": "Ocean beach", "Source/Sample": "Beach sand", "Host": "N/A", "Depth _Altitude": "N/A"}, "GCD77160": {"IG/MAG": "IG", "Location": "AS:Japan:Nagano", "Environment": "Terrestrial hot spring", "Source/Sample": "Hot spring", "Host": "N/A", "Depth _Altitude": "N/A"}, "GCD80454": {"IG/MAG": "IG", "Location": "AS:Japan:Nagano", "Environment": "Terrestrial hot spring", "Source/Sample": "Hot spring", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGH88435": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Ulugh Muztagh glacier", "Environment": "Alpine glacier", "Source/Sample": "Ice core", "Host": "N/A", "Depth _Altitude": "depth 96.23 m, altitude=5770"}, "GGF73035": {"IG/MAG": "IG", "Location": "AS:China:Zhangye:Sunan Yugue Autonomous County:Qilian Mountains", "Environment": "Permafrost region", "Source/Sample": "Subsurface sandstone sediment", "Host": "N/A", "Depth _Altitude": "depth=356 m"}, "CP073016": {"IG/MAG": "MAG", "Location": "NA:USA:Washington:Wiser Lake ", "Environment": "Fresh water lake", "Source/Sample": "Environmental", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ245731": {"IG/MAG": "MAG", "Location": "NA:USA:Pennsylvania:Pennsylvania State University", "Environment": "N/A", "Source/Sample": "Dinoflagellate: Breviolum psygmophilum", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP121331": {"IG/MAG": "MAG", "Location": "EU:France:Bouin", "Environment": "Ocean, oyster beds", "Source/Sample": "Haslea ostrearia NCC 532 culture", "Host": "N/A", "Depth _Altitude": "N/A"}, "OX044357": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVS12205": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1141 m"}, "TVQ33031": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1096 m"}, "PZO09322": {"IG/MAG": "MAG", "Location": "AQ:Antarctica", "Environment": "N/A", "Source/Sample": "Microbial mat ULC165", "Host": "N/A", "Depth _Altitude": "N/A"}, "EDP63929": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYX73886": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYW29954": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGE78254": {"IG/MAG": "IG", "Location": "AS:China:Qinhai:Haixi Mongol and Tibetan Autonomous Prefecture:Golmud", "Environment": "Alpine meadow", "Source/Sample": "Soil, meadow ", "Host": "N/A", "Depth _Altitude": "N/A"}, "S3H21": {"IG/MAG": "IG", "Location": "EU: Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "RXD06694": {"IG/MAG": "IG", "Location": "AQ:Antarctica", "Environment": "Ocean", "Source/Sample": "Seawater ", "Host": "N/A", "Depth _Altitude": "N/A"}, "PZO76000": {"IG/MAG": "MAG", "Location": "NA:USA:Pittsburgh", "Environment": "Hospital", "Source/Sample": "Hospital NICU surfaces and sink samples", "Host": "N/A", "Depth _Altitude": "N/A"}, "KQN28516": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidopsis thaliana", "Depth _Altitude": "N/A"}, "JPL28": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "26OR1": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Seed", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "BCA61338": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Skarvsnes:Hotoke-Ike lake", "Environment": "Freshwater lake, ultra-oligotrophic ", "Source/Sample": "Lake water, ultra-oligotrophic, interstitial  water of a moss pillar on the bottom  ", "Host": "N/A", "Depth _Altitude": "N/A"}, "JWL2": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "JOBD13": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Bistorta vivipara", "Depth _Altitude": "N/A"}, "S2H28": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "9OR8": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Seed", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "L1DT4B": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "L1BD2": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "VOU06NAS01": {"IG/MAG": "IG", "Location": "EU:Finland:Oulu", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Vaccinium myrtillus", "Depth _Altitude": "N/A"}, "PJK06NCP03": {"IG/MAG": "IG", "Location": "EU:Finland:Jyväskylä", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Vaccinium vitis-idaea", "Depth _Altitude": "N/A"}, "VVT24364": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "KQN08864": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidopsis thaliana", "Depth _Altitude": "N/A"}, "GGE22526": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Ulugh Muztagh glacier", "Environment": "Glacier", "Source/Sample": "Ice core", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGA49527": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Midui glacier", "Environment": "Glacier", "Source/Sample": "Ice", "Host": "N/A", "Depth _Altitude": "N/A"}, "SKI02AP11": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "JOOD22": {"IG/MAG": "IG", "Location": "N/A", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "LKI02BS01": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Dryas octopetala", "Depth _Altitude": "N/A"}, "OYX52601": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "RYD68531": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:Norwich", "Environment": "Deciduous woodland, University campus", "Source/Sample": "Phyllosphere", "Host": "Populus alba", "Depth _Altitude": "N/A"}, "AHE52940": {"IG/MAG": "IG", "Location": "AS:China:Xinhe County", "Environment": "Agricultural", "Source/Sample": "Soil, cornfield", "Host": "N/A", "Depth _Altitude": "N/A"}, "SSN206AS01": {"IG/MAG": "IG", "Location": "NA:Denmark:Greenland:Station Nord2", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "L1BT3": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "POU06NBS01": {"IG/MAG": "IG", "Location": "EU:Finland:Oulu", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Vaccinium vitis-idaea", "Depth _Altitude": "N/A"}, "POU06NCP01": {"IG/MAG": "IG", "Location": "EU:Finland:Oulu", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Vaccinium vitis-idaea", "Depth _Altitude": "N/A"}, "KQM73760": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "L1CD2B": {"IG/MAG": "IG", "Location": "EU:Svalbard:Longyearbyen ", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Oxyria digyna", "Depth _Altitude": "N/A"}, "KQM62812": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "TPG09633": {"IG/MAG": "IG", "Location": "NA:Canada:Axel Heiberg Island", "Environment": "N/A", "Source/Sample": "Ice-wedge polygon", "Host": "N/A", "Depth _Altitude": "N/A"}, "SKI02CP10": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "SKI02AS03": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "Endophytic", "Host": "Saxifraga oppositifolia", "Depth _Altitude": "N/A"}, "QBM75193": {"IG/MAG": "IG", "Location": "EU:Austria:Tyrol:Lake Gossenkoellesee", "Environment": "Alpine lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GHH23836": {"IG/MAG": "IG", "Location": "EU:Austria:Tyrol:Innsbruck:Stubai Glacier", "Environment": "Alpine glacier", "Source/Sample": "Cryoconite", "Host": "N/A", "Depth _Altitude": "altitude=2900 m"}, "MTK02EP03": {"IG/MAG": "IG", "Location": "EU:Finland:Turku", "Environment": "Plant-associated", "Source/Sample": "Epiphytic", "Host": "Pinus sylvestris", "Depth _Altitude": "N/A"}, "TPG52660": {"IG/MAG": "IG", "Location": "NA:Canada:Axel Heiberg Island", "Environment": "N/A", "Source/Sample": "Ice-wedge polygon", "Host": "N/A", "Depth _Altitude": "N/A"}, "M1U20": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "N/A", "Host": "Diapensia lapponica", "Depth _Altitude": "N/A"}, "J1U1": {"IG/MAG": "IG", "Location": "EU:Finland:Kilpisjärvi", "Environment": "Plant-associated", "Source/Sample": "N/A", "Host": "Diapensia lapponica", "Depth _Altitude": "N/A"}, "TGN61835": {"IG/MAG": "IG", "Location": "AS:China:Qinghai Province", "Environment": "N/A", "Source/Sample": "Feces", "Host": "Tibetan antelope", "Depth _Altitude": "N/A"}, "TJZ84602": {"IG/MAG": "IG", "Location": "AS:South Korea:Yongin", "Environment": "N/A", "Source/Sample": "Rhizosphere", "Host": "Hibiscus syriacus (Mugunghwa)", "Depth _Altitude": "N/A"}, "ODT58092": {"IG/MAG": "MAG", "Location": "ZA:South Africa:Rondebosch:University of Cape Town", "Environment": "Bioreactor", "Source/Sample": "Cyanide and thiocyanate bioreactor", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252211": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "BCA60302": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Skarvsnes:Hotoke-Ike lake", "Environment": "Freshwater lake, ultra-oligotrophic", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PZN99150": {"IG/MAG": "MAG", "Location": "AQ:Antarctica", "Environment": "Glacier", "Source/Sample": "Microbial mat ULC165", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYX57372": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PIX67554": {"IG/MAG": "MAG", "Location": "NA:USA:Utah:Crystal Geyser near Green River", "Environment": "Ground water", "Source/Sample": "Ground water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGB53743": {"IG/MAG": "IG", "Location": "AS:China:Tibetan Plateau:Lake Pengcuo", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "altitude=4522 m"}, "OHC98024": {"IG/MAG": "MAG", "Location": "NA:USA:Colorado:Rifle", "Environment": "City", "Source/Sample": "Well, FP-101 under low O2", "Host": "N/A", "Depth _Altitude": "N/A"}, "OHD05260": {"IG/MAG": "MAG", "Location": "NA:USA:Colorado:Rifle", "Environment": "City", "Source/Sample": "Well, CD01", "Host": "N/A", "Depth _Altitude": "N/A"}, "EXS71053": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Scott Base", "Environment": "N/A", "Source/Sample": "Soil, oil-contaminated ", "Host": "N/A", "Depth _Altitude": "N/A"}, "PBN43411": {"IG/MAG": "IG", "Location": "AQ:Antarctica:South Shetland Islands", "Environment": "N/A", "Source/Sample": "Soil, diesel fuel contaminated ", "Host": "N/A", "Depth _Altitude": "N/A"}, "AOF96519": {"IG/MAG": "IG", "Location": "NA:USA:Washington:Seattle", "Environment": "N/A", "Source/Sample": "Phycosphere", "Host": "Chrysochromulina tobin ", "Depth _Altitude": "N/A"}, "OYY69292": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYY97977": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OYZ61278": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZA83208": {"IG/MAG": "MAG", "Location": "NA:Canada:Ontario", "Environment": "Mine wastewater", "Source/Sample": "Mine wastewater", "Host": "N/A", "Depth _Altitude": "N/A"}, "RRQ51041": {"IG/MAG": "IG", "Location": "AS:South Korea", "Environment": "N/A", "Source/Sample": "Wetland", "Host": "N/A", "Depth _Altitude": "N/A"}, "OAN57215": {"IG/MAG": "IG", "Location": "AS:Japan:Nagaoka", "Environment": "N/A", "Source/Sample": "Sediment", "Host": "N/A", "Depth _Altitude": "N/A"}, "KTF68840": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "Ocean", "Source/Sample": "Sea-mud", "Host": "N/A", "Depth _Altitude": "N/A"}, "PVX30487": {"IG/MAG": "IG", "Location": "AS:India:Kerala:Ernakulam", "Environment": "Rice paddy field", "Source/Sample": "Rhizosphere", "Host": "Oryza sativa L, Pokkali rice, saline tolerant", "Depth _Altitude": "N/A"}, "CP136575": {"IG/MAG": "MAG", "Location": "AS:South Korea:Guri:Han river", "Environment": "City river", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KPF93223": {"IG/MAG": "IG", "Location": "AS:China:Tibet", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KKC31033": {"IG/MAG": "IG", "Location": "EU:Austria:Tyrol", "Environment": "Alpine glacier", "Source/Sample": "Alpine glacier cryoconite", "Host": "N/A", "Depth _Altitude": "altitude=2875 m"}, "RFU11683": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Ayakekum Lake", "Environment": "Saline lake", "Source/Sample": "Lake water, saline", "Host": "N/A", "Depth _Altitude": "N/A"}, "KIN73522": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Vestfold Hills:Ekho Lake", "Environment": "Ocean, coast", "Source/Sample": "Seawater, coastal", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGD04646": {"IG/MAG": "IG", "Location": "AS:China:Qinghai Province:Qaidam basin:Lake Dasugan", "Environment": "Saline lake", "Source/Sample": "Lake water, saline", "Host": "N/A", "Depth _Altitude": "depth=0.3 m, salinity 3.1 %, dissolved oxygen 7.0 mg l− 1, pH 9.0 and temperature 12.8 °C"}, "SN06POND07": {"IG/MAG": "IG", "Location": "NA:Denmark:Greenland:Station Nord", "Environment": "Plant-associated", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ243888": {"IG/MAG": "MAG", "Location": "EU:Italy:Liguria:Lerici", "Environment": "N/A", "Source/Sample": "Lichen", "Host": "Lichina confinis", "Depth _Altitude": "N/A"}, "GDX15377": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO48502": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDP99755": {"IG/MAG": "IG", "Location": "AS:Japan:Saitama:Yoshimi:Ichino River:Kachi Bridge", "Environment": "River", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDU10525": {"IG/MAG": "IG", "Location": "AS:Japan:Fukushima:Inawashiro-machi yama-gun:Lake Inawashiro", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "surface water"}, "BDS50908": {"IG/MAG": "IG", "Location": "AS:Japan:Saitama:Yoshimi:Ichino River:Kachi Bridge", "Environment": "River", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDS48601": {"IG/MAG": "IG", "Location": "AS:Japan:Ibaraki:Lake Kasumigaura", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KGA09086": {"IG/MAG": "MAG", "Location": "EU:Spain:Valencia:Embalse de Amadorio reservoir", "Environment": "Freshwater reservoir", "Source/Sample": "Lake water, reservoir", "Host": "N/A", "Depth _Altitude": "N/A"}, "RZP28624": {"IG/MAG": "MAG", "Location": "EU:Spain:Off the coast of Alicante", "Environment": "Mediterranean Sea", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PQM62056": {"IG/MAG": "MAG", "Location": "Atlantic Ocean:North Atlantic Ocean", "Environment": "Atlantic Ocean", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "TEX51253": {"IG/MAG": "MAG", "Location": "SA:Brazil:São Paulo:São Paolo Zoo", "Environment": "Freshwater lake in a zoo", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "BDP42045": {"IG/MAG": "IG", "Location": "AS:Japan", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ71425": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ75764": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVR25957": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1106 m"}, "PSN19400": {"IG/MAG": "IG", "Location": "NA:USA:Massachusetts:Cape Cod:Sippewissett Salt Marsh:Buzzards Bay", "Environment": "Salt marsh", "Source/Sample": "salt marsh", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVR90991": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252252": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "PNY79880": {"IG/MAG": "IG", "Location": "AS:South Korea", "Environment": "River", "Source/Sample": "River water", "Host": "N/A", "Depth _Altitude": "N/A"}, "VIP02740": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "strain ATCC 43644", "Host": "N/A", "Depth _Altitude": "N/A"}, "CP030884": {"IG/MAG": "MAG", "Location": "OC:USA:Guam:Outhouse Beach:Apra Harbor", "Environment": "NW Pacific ocean", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "OY829846": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "Diatom: Epithemia sp. CRS-2021b", "Host": "N/A", "Depth _Altitude": "N/A"}, "RLT17137": {"IG/MAG": "MAG", "Location": "EU:Switzerland:Lake Zurich", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "40-80 m depth"}, "RLS66247": {"IG/MAG": "MAG", "Location": "EU:Switzerland:Lake Zurich", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "5 m depth"}, "RDI95066": {"IG/MAG": "IG", "Location": "AS:China:Fujian", "Environment": "Hot spring", "Source/Sample": "Hot spring", "Host": "N/A", "Depth _Altitude": "N/A"}, "GLV48970": {"IG/MAG": "IG", "Location": "AS:Indonesia:West Java:Cisolok geothermal area", "Environment": "Nature park", "Source/Sample": "Litter", "Host": "N/A", "Depth _Altitude": "N/A"}, "RLT23870": {"IG/MAG": "MAG", "Location": "EU:Spain:Alicante:Amadorio reservoir", "Environment": "Freshwater reservoir", "Source/Sample": "Lake water, reservoir", "Host": "N/A", "Depth _Altitude": "10 m depth"}, "RPF79760": {"IG/MAG": "MAG", "Location": "EU:Mediterranean Sea", "Environment": "Mediterranean Sea", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "RCL66720": {"IG/MAG": "MAG", "Location": "EU:Spain:Off the coast of Alicante", "Environment": "Mediterranean Sea", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PTM12582": {"IG/MAG": "MAG", "Location": "NA:USA:Delaware:Delaware Bay", "Environment": "Atlantic Ocean", "Source/Sample": "Seawater, brackish", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX68660": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "RMF54189": {"IG/MAG": "MAG", "Location": "AS:Japan:Tokyo Prefecture:Shikinejima Island:Jinata Onsen", "Environment": "Hot spring", "Source/Sample": "Hot spring, iron-rich", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGD58117": {"IG/MAG": "IG", "Location": "AS:China:Tibet:East Rongbuk Glacier", "Environment": "Glacier", "Source/Sample": "Ice core", "Host": "N/A", "Depth _Altitude": "N/A"}, "GIJ78539": {"IG/MAG": "IG", "Location": "AS:China:Heilongjiang:Harbin", "Environment": "N/A", "Source/Sample": "Root", "Host": "Phaseolus vulgaris", "Depth _Altitude": "N/A"}, "GGL78780": {"IG/MAG": "IG", "Location": "Atlantic Ocean", "Environment": "Atlantic Ocean", "Source/Sample": "Sediment, deep-sea ", "Host": "N/A", "Depth _Altitude": "depth=2983 m"}, "GIK75739": {"IG/MAG": "MAG", "Location": "N/A", "Environment": "Bioreactor", "Source/Sample": "Long-term freshwater anammox column reactor", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ244400": {"IG/MAG": "MAG", "Location": "EU:Italy:Liguria:Lerici", "Environment": "N/A", "Source/Sample": "Lichen", "Host": "Lichina confinis", "Depth _Altitude": "N/A"}, "CP175953": {"IG/MAG": "MAG", "Location": "NA:USA:Maryland:Baltimore", "Environment": "N/A", "Source/Sample": "Non-axenic microalgal culture", "Host": "Nannochloropsis oceanica", "Depth _Altitude": "N/A"}, "OFE15031": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Signy Island", "Environment": "N/A", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "KAA9111499": {"IG/MAG": "IG", "Location": "AS:South Korea:Gangwon:Hwacheon mountain", "Environment": "Mountains", "Source/Sample": "Rhizome", "Host": "Panax ginseng Meyer, eight year old", "Depth _Altitude": "N/A"}, "GGL05201": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TIH31229": {"IG/MAG": "IG", "Location": "SA:Chile:Llullaillaco volcano", "Environment": "Volcano lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "altitude=6170 m"}, "AZI59391": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "N/A", "Source/Sample": "strain=S14-144", "Host": "N/A", "Depth _Altitude": "N/A"}, "QHO71000": {"IG/MAG": "IG", "Location": "AQ:Antarctica", "Environment": "N/A", "Source/Sample": "Sediment", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC16264": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "PPF85931": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "AWG02835": {"IG/MAG": "IG", "Location": "NA:USA:Kansas", "Environment": "N/A", "Source/Sample": "N/A", "Host": "Medicago sativa", "Depth _Altitude": "N/A"}, "AJW80239": {"IG/MAG": "IG", "Location": "NA:USA:Minnesota:Ramsey County ", "Environment": "N/A", "Source/Sample": "Stem tissue", "Host": "Medicago truncatula/Medicago sativa L.", "Depth _Altitude": "N/A"}, "RFA24929": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land:Mount Carson", "Environment": "Glacier", "Source/Sample": "Silt mudstone", "Host": "N/A", "Depth _Altitude": "altitude=2555 m"}, "RFA18018": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land:Eureka Spurs", "Environment": "Glacier", "Source/Sample": "Fine sandstone", "Host": "N/A", "Depth _Altitude": "altitude=1627 m"}, "RFA18400": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land:Eureka Spurs", "Environment": "Glacier", "Source/Sample": "Limestone", "Host": "N/A", "Depth _Altitude": "altitude=1652 m"}, "RFA12328": {"IG/MAG": "IG", "Location": "AQ:Antarctica:South Shetland islands:King George Island", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB90653": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC17038": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB96360": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "ANP74617": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Northern Victoria Land", "Environment": "Glacier", "Source/Sample": "Rock", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD93427": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "PXA72408": {"IG/MAG": "IG", "Location": "N/A", "Environment": "Arctic", "Source/Sample": "Soil, arctic", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB99530": {"IG/MAG": "IG", "Location": "AS:China:Tibet:Nyingchi", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "POH71228": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "Glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "POH64568": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "N/A", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "ASD22500": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "altitude=3833 m"}, "GGF92574": {"IG/MAG": "IG", "Location": "EU:Germany:Thüringen", "Environment": "N/A", "Source/Sample": "Leaf", "Host": "Trifolium repens", "Depth _Altitude": "N/A"}, "OZE29894": {"IG/MAG": "IG", "Location": "NA:USA:Washington", "Environment": "N/A", "Source/Sample": "N/A", "Host": "Oenothera", "Depth _Altitude": "N/A"}, "OZE95541": {"IG/MAG": "IG", "Location": "NA:USA:Washington", "Environment": "N/A", "Source/Sample": "N/A", "Host": "Veronica", "Depth _Altitude": "N/A"}, "RJT90601": {"IG/MAG": "IG", "Location": "AS:China", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD85230": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC25459": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB89747": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD24290": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD08492": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC80037": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB81715": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD76797": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Showa station", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD76712": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC80606": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC31694": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFB54523": {"IG/MAG": "IG", "Location": "AS:China:Xinjiang:Glacier No.1 in the Tianshan Mountains ", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC91058": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFC85940": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "TFD28381": {"IG/MAG": "IG", "Location": "AS:China:Gansu:Jiuquan:Subei Mongol Autonomous County", "Environment": "Alpine glacier", "Source/Sample": "Glacier", "Host": "N/A", "Depth _Altitude": "N/A"}, "PPB48466": {"IG/MAG": "IG", "Location": "MENA:Turkey:Black Sea Region:Samsun", "Environment": "Pine forest", "Source/Sample": "Caterpillar of the pine processionary moth", "Host": "Thaumetopoea pityocampa, Scots pine (Pinus sylvestris L.)", "Depth _Altitude": "N/A"}, "PVE17425": {"IG/MAG": "IG", "Location": "AS:Russia:Arctic Far East:Chukotka:Anyuy River near Anyuysk settlement", "Environment": "N/A", "Source/Sample": "strain=Bz4", "Host": "Bison priscus", "Depth _Altitude": "N/A"}, "PPB45911": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "TPV25452": {"IG/MAG": "IG", "Location": "N/A", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "OUM42966": {"IG/MAG": "IG", "Location": "EU:France:Noyant:Rabion", "Environment": "N/A", "Source/Sample": "Soil, agricultural ", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVS86872": {"IG/MAG": "IG", "Location": "EU:Switzerland", "Environment": "N/A", "Source/Sample": "strain=17-773", "Host": "Pig", "Depth _Altitude": "N/A"}, "BBX67830": {"IG/MAG": "IG", "Location": "EU:Spain:Salamanca", "Environment": "Near a uranium mine", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "PND56870": {"IG/MAG": "IG", "Location": "NA:USA", "Environment": "N/A", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "KAA0928310": {"IG/MAG": "IG", "Location": "AQ:Antarctica:King George Island:Admiralty Bay:Henryk Arctowski Polish Antarctic Station", "Environment": "Petroleum pumping and storage warehouse", "Source/Sample": "Soil, petroleum contaminated", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGF14204": {"IG/MAG": "IG", "Location": "EU:Germany:", "Environment": "N/A", "Source/Sample": "Leaf, surface", "Host": "Trifolium repens", "Depth _Altitude": "N/A"}, "OJY43810": {"IG/MAG": "MAG", "Location": "ZA:South-Africa:University of Cape Town", "Environment": "Ammonium sulfate bioreactor", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}, "KQP67191": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "KQQ42193": {"IG/MAG": "IG", "Location": "EU:Switzerland:Zurich", "Environment": "City park", "Source/Sample": "Leaf", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "KQY09766": {"IG/MAG": "IG", "Location": "EU:Germany:Cologne", "Environment": "Greenhouse", "Source/Sample": "Root", "Host": "Arabidobsis thaliana", "Depth _Altitude": "N/A"}, "BDX33020": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Skallen", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "GLP76198": {"IG/MAG": "IG", "Location": "AQ:Antarctica:Langhovde", "Environment": "Glacier", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "TPG37408": {"IG/MAG": "IG", "Location": "NA:Canada:Axel Heiberg Island", "Environment": "Glacier", "Source/Sample": "Ice-wedge polygon", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX17393": {"IG/MAG": "IG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX33038": {"IG/MAG": "IG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PHX60469": {"IG/MAG": "MAG", "Location": "AS:Russia:Southern Siberia:Lake Baikal", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PHX75877": {"IG/MAG": "MAG", "Location": "AS:Russia:Southern Siberia:Lake Baikal", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX16682": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX22696": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO36646": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "QLL24047": {"IG/MAG": "IG", "Location": "AS:South Korea:Lake Soyang", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "QLL25445": {"IG/MAG": "IG", "Location": "AS:South Korea:Lake Soyang", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX24649": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "GDX21556": {"IG/MAG": "MAG", "Location": "AS:Japan:Shiga:Lake Biwa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "TRZ73044": {"IG/MAG": "MAG", "Location": "NA:Canada:British Columbia:Powell Lake South basin", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO30341": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO49903": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "KRO51529": {"IG/MAG": "MAG", "Location": "EU:Baltic Sea", "Environment": "Baltic sea", "Source/Sample": "Brackish surface water", "Host": "N/A", "Depth _Altitude": "N/A"}, "TSA20550": {"IG/MAG": "MAG", "Location": "NA:Canada:British Columbia:Powell Lake South basin", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "PJF31817": {"IG/MAG": "MAG", "Location": "AS:Japan:Nagano Prefecture:Nakabusa Onsen", "Environment": "Hot spring", "Source/Sample": "Hot spring, alkaline, sulfidic ", "Host": "N/A", "Depth _Altitude": "N/A"}, "RMH64933": {"IG/MAG": "MAG", "Location": "AS:Japan:Tokyo Prefecture:Shikinejima Island", "Environment": "Hot spring", "Source/Sample": "Hot spring, iron-rich ", "Host": "N/A", "Depth _Altitude": "N/A"}, "PEN15075": {"IG/MAG": "IG", "Location": "AS:China:Shandong:Weihai Coast", "Environment": "Ocean, coast, river delta", "Source/Sample": "Marine solar saltern", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ94854": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ66410": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "3DDL": {"IG/MAG": "IG", "Location": "EU:Spain:Mallorca", "Environment": "N/A", "Source/Sample": "Solar santern", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ94898": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ65031": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PQJ33473": {"IG/MAG": "IG", "Location": "N/A", "Environment": "Ocean", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "PSQ95756": {"IG/MAG": "MAG", "Location": "SA:Chile:Atacama Desert", "Environment": "Desert", "Source/Sample": "Salt crust", "Host": "N/A", "Depth _Altitude": "N/A"}, "PJF35373": {"IG/MAG": "MAG", "Location": "AS:Japan:Shikinejima:Jinata Onsen", "Environment": "Hot spring", "Source/Sample": "Hot spring, iron-rich ", "Host": "N/A", "Depth _Altitude": "N/A"}, "ANE44876": {"IG/MAG": "IG", "Location": "AS:South Korea:Mountain of Deogyusan", "Environment": "N/A", "Source/Sample": "Soil", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252009": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "GGR19346": {"IG/MAG": "IG", "Location": "AS:South Korea", "Environment": "Garden", "Source/Sample": "Soil, garden", "Host": "N/A", "Depth _Altitude": "N/A"}, "GGJ70114": {"IG/MAG": "IG", "Location": "AS:Japan:Tottori Prefecture:Misasa", "Environment": "Freshwater lake", "Source/Sample": "Lake water", "Host": "N/A", "Depth _Altitude": "N/A"}, "OZ252036": {"IG/MAG": "MAG", "Location": "EU:United Kingdom:West Ross and Cromarty:Kinlochewe:Beinn Eighe NNR, Coille na Glas Leitire", "Environment": "Pinewood", "Source/Sample": "Lichen", "Host": "Ephebe lanata", "Depth _Altitude": "N/A"}, "RZM77228": {"IG/MAG": "IG", "Location": "AS:India", "Environment": "Ocean, coast, river delta", "Source/Sample": "Seawater", "Host": "N/A", "Depth _Altitude": "N/A"}, "TVP63961": {"IG/MAG": "MAG", "Location": "NA:Canada:Cariboo Plateau", "Environment": "Soda lake", "Source/Sample": "Lake water, alkaline, salty", "Host": "N/A", "Depth _Altitude": "altitude=1090 m"}, "ESA36503": {"IG/MAG": "IG", "Location": "OC:Australia:Heron Island", "Environment": "N/A", "Source/Sample": "N/A", "Host": "N/A", "Depth _Altitude": "N/A"}};
 
     const residuePalette = ["blue","orange","black","white","purple","yellow","cyan","magenta","green","pink","brown","gray","teal","navy","lime"];
 
@@ -4552,37 +4548,36 @@
       const entry = filteredProteins[index];
       if (!entry) return;
 
-      const ext = "cif";
-      const filePath = `models/${entry.id}.${ext}`;
+      const ext = entry.format === "cif" ? "cif" : "pdb";
+      const filePath = `models/${normalizeProteinId(entry.id)}.${ext}`;
 
       viewer.clear();
       tooltip.style.display = 'none';
 
       $3Dmol.download(filePath, viewer, { format: ext }, function() {
-        const proteinID = entry.id;
+        const proteinID = normalizeProteinId(normalizeProteinId(entry.id));
 
         // Base gray
-        viewer.setStyle({}, { cartoon: { color: 'gray' } });
+        viewer.setStyle({ hetflag: false }, { cartoon: { color: 'gray' } });
 
         // Special references green
         if (proteinID === "3DDL" || proteinID === "8I2Z") {
-          viewer.setStyle({}, { cartoon: { color: 'green' } });
+          viewer.setStyle({ hetflag: false }, { cartoon: { color: 'green' } });
         }
 
         // Conserved residues: color by position mapping
-        const residueKey = residueKeyAliases[proteinID] || proteinID;
-        if (conservedResidues[residueKey]) {
+        if (conservedResidues[proteinID]) {
           let i = 0;
           for (const [resiStr, color] of Object.entries(conservedResidues[proteinID])) {
             const resi = parseInt(resiStr, 10);
             // only allow simple color names or hex; values already simple
-            viewer.addStyle({ resi }, { cartoon: { color } });
+            viewer.addStyle({ resi, hetflag: false }, { cartoon: { color } });
             i++;
           }
         }
 
         // Hover with highlight stick highlight
-        viewer.setHoverable({}, true,
+        viewer.setHoverable({ hetflag: false }, true,
           function(atom, viewer, event, container) {
             if(atom) {
               tooltip.style.display = "block";
@@ -4596,29 +4591,28 @@
           function(atom, viewer) {
             tooltip.style.display = "none";
             // Restore base styles
-            viewer.setStyle({}, { cartoon: { color: 'gray' } });
+            viewer.setStyle({ hetflag: false }, { cartoon: { color: 'gray' } });
             if (proteinID === "3DDL" || proteinID === "8I2Z") {
               viewer.addStyle({}, { cartoon: { color: 'green' } });
             }
-            const residueKey = residueKeyAliases[proteinID] || proteinID;
-        if (conservedResidues[residueKey]) {
+            if (conservedResidues[proteinID]) {
               for (const [resiStr, color] of Object.entries(conservedResidues[proteinID])) {
                 const resi = parseInt(resiStr, 10);
-                viewer.addStyle({ resi }, { cartoon: { color } });
+                viewer.addStyle({ resi, hetflag: false }, { cartoon: { color } });
               }
             }
             viewer.render();
           }
         );
 
-        viewer.zoomTo();
+        viewer.zoomTo({ hetflag: false });
         viewer.render();
       });
 
       // Metadata: line by line
-      const m = proteinMetadata[entry.id] || {"IG/MAG":"N/A","Location":"N/A","Environment":"N/A","Source/Sample":"N/A","Host":"N/A","Depth _Altitude":"N/A"};
+      const m = proteinMetadata[normalizeProteinId(entry.id)] || {"IG/MAG":"N/A","Location":"N/A","Environment":"N/A","Source/Sample":"N/A","Host":"N/A","Depth _Altitude":"N/A"};
       let metaLines = [];
-      metaLines.push(`ID: ${entry.id}`);
+      metaLines.push(`ID: ${normalizeProteinId(entry.id)}`);
       metaLines.push(`HDBSCAN cluster: ${entry.cluster}\nTM cluster: ${entry.tm_cluster}`);
       metaLines.push(`Type: ${entry.experimental ? "Experimental" : "Predicted"}`);
       for (const key of Object.keys(m).sort()) {
